@@ -1,14 +1,16 @@
 
 
 
-#include "../UI/CmtCommonActivatableWidget.h"
+#include "CmtActivatableWidget.h"
 
-UCmtCommonActivatableWidget::UCmtCommonActivatableWidget(const FObjectInitializer& ObjectInitializer)
+
+
+UCmtActivatableWidget::UCmtActivatableWidget(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
 {
 }
 
-TOptional<FUIInputConfig> UCmtCommonActivatableWidget::GetDesiredInputConfig() const
+TOptional<FUIInputConfig> UCmtActivatableWidget::GetDesiredInputConfig() const
 {
 	FUIInputConfig ConfigOverride;
 

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "CommonActivatableWidget.h"
-#include "CmtCommonActivatableWidget.generated.h"
+#include "CmtActivatableWidget.generated.h"
 
 /**
  * Input Modes that GthrActivatableWidgets can activate
@@ -21,14 +21,16 @@ enum class ECmtWidgetInputMode : uint8
 
 
 /**
+ * A common activatable widget with option to define which input it should response to
+ *
  * 
  */
 UCLASS()
-class COMMONUIMENUTEMPLATE_API UCmtCommonActivatableWidget : public UCommonActivatableWidget
+class COMMONUIMENUTEMPLATE_API UCmtActivatableWidget : public UCommonActivatableWidget
 {
 	GENERATED_BODY()
 public:
-	UCmtCommonActivatableWidget(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+	UCmtActivatableWidget(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
 	//~UCommonActivatableWidget interface
 	virtual TOptional<FUIInputConfig> GetDesiredInputConfig() const override;
