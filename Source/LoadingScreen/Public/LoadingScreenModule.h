@@ -2,13 +2,13 @@
 
 #include "Modules/ModuleManager.h"
 
-struct FLoadingScreenSettings;
+struct FStartupLoadingScreenSettings;
 
 class FLoadingScreenModule : public IModuleInterface
 {
 public:
-	/** IModuleInterface implementation */
-
+	
+	//~UCommonActivatableWidget interface
 	/**
 	 * Called right after the module DLL has been loaded and the module object has been created
 	 */
@@ -25,16 +25,8 @@ public:
 	 * @return True for "gameplay modules", or false for engine code modules, plugins, etc.
 	 */
 	virtual bool IsGameModule() const override;
+	//~End of UCommonActivatableWidget interface
 
 private:
-	/**
-	 * Movie Player callback, it won't be called if we've already setup the loading screen
-	 */
-	void OnMoviePlayerPrepareLoadingScreen();
-
-
-	void SetupLoadingScreen(const FLoadingScreenSettings& LoadingScreenSettings);
-	
-	
-	bool bStartupLoadingScreenPrepared = false;
+	void SetupStartupLoadingScreen(const FStartupLoadingScreenSettings& LoadingScreenSettings);
 };

@@ -4,53 +4,33 @@
 #include "LoadingScreenSettings.h"
 
 
-
 void FLoadingScreenModule::StartupModule()
 {
-	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
-	if (!IsRunningDedicatedServer() && FSlateApplication::IsInitialized())
+	if (IsMoviePlayerEnabled())
 	{
-		if (IsMoviePlayerEnabled())
-		{
-			GetMoviePlayer()->OnPrepareLoadingScreen().AddRaw(this, &FLoadingScreenModule::OnMoviePlayerPrepareLoadingScreen);				
-		}		
-
-		if(!bStartupLoadingScreenPrepared)
-		{
-			// Prepare the startup screen
-			const ULoadingScreenEditorSettings* Settings = GetDefault<ULoadingScreenEditorSettings>();
-			//TODO maybe move this at the end of the function call
-			//guard for OnPrepareLoading so that we dont call it again since we dont have to
-			bStartupLoadingScreenPrepared = true;
-			SetupLoadingScreen(Settings->StartupLoadingScreen);
-		}
-	}	
-	
-	IModuleInterface::StartupModule();
+		const ULoadingScreenEditorSettings* Settings = GetDefault<ULoadingScreenEditorSettings>();
+		SetupStartupLoadingScreen(Settings->StartupLoadingScreen);
+	}
 }
 
 void FLoadingScreenModule::ShutdownModule()
 {
-	IModuleInterface::ShutdownModule();
 }
 
 bool FLoadingScreenModule::IsGameModule() const
 {
-	return IModuleInterface::IsGameModule();
+	return true;
 }
 
-void FLoadingScreenModule::OnMoviePlayerPrepareLoadingScreen()
+void FLoadingScreenModule::SetupStartupLoadingScreen(const FStartupLoadingScreenSettings& StartupLoadingScreenSettings)
 {
-	if(bStartupLoadingScreenPrepared)
-		return;
+	// In this project for startup we only consider using the movies so no widget is set for the Movie Player
+	FLoadingScreenAttributes LSAttributes;
+	LSAttributes.bMoviesAreSkippable = StartupLoadingScreenSettings.bMoviesAreSkippable;
+	LSAttributes.MoviePaths = StartupLoadingScreenSettings.MoviePaths;
 	
-	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Blue, TEXT("OnMoviePlayerPrepareLoadingScreen"));
-}
-
-void FLoadingScreenModule::SetupLoadingScreen(const FLoadingScreenSettings& LoadingScreenSettings)
-{	
-	GEngine->AddOnScreenDebugMessage(0, 5.0f, FColor::Blue, TEXT("SetupLoadingScreen"));
+	GetMoviePlayer()->SetupLoadingScreen(LSAttributes);
 }
 
 
-IMPLEMENT_MODULE(FDefaultModuleImpl, LoadingScreen);
+IMPLEMENT_GAME_MODULE(FLoadingScreenModule, LoadingScreen);

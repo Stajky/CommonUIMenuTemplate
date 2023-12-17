@@ -11,7 +11,8 @@ public class LoadingScreen : ModuleRules
 			"Engine",
 			"MoviePlayer",
 			"DeveloperSettings",
-			"Slate"
+			"Slate",
+			"SlateCore"
 		});
 	}
 }

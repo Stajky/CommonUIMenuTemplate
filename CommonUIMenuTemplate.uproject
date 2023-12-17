@@ -16,11 +16,8 @@
 		},
 		{
 			"Name": "LoadingScreen",
-			"Type": "Runtime",
-			"LoadingPhase": "PreLoadingScreen",
-			"AdditionalDependencies": [
-				"Engine"
-			]
+			"Type": "ClientOnly",
+			"LoadingPhase": "PreLoadingScreen"
 		}
 	],
 	"Plugins": [
