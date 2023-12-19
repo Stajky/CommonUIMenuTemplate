@@ -3,8 +3,8 @@
 #include "CoreMinimal.h"
 #include "Engine/DeveloperSettings.h"
 #include "UObject/ConstructorHelpers.h"
-#include "MoviePlayer.h"
 #include "Widgets/Layout/SScaleBox.h"
+#include "Layout/Margin.h"
 #include "LoadingScreenSettings.generated.h"
 
 
@@ -35,16 +35,29 @@ struct LOADINGSCREEN_API FBackgroundSettings
  * Background widget for the widget loading screen
  */
 USTRUCT(BlueprintType)
-struct LOADINGSCREEN_API FImageSequenceSSettings
+struct LOADINGSCREEN_API FImageSequenceSettings
 {
 	GENERATED_BODY()
 
-	// The images randomly display while in the loading screen on top of the movie 
-	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Background", meta = (AllowedClasses = "/Script/Engine.Texture2D"))
-	FSoftObjectPath ImagePath;
+	/** An array of images for animating the loading icon.*/
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (AllowedClasses = "/Script/Engine.Texture2D"))
+	TArray<UTexture2D*> Images;
 
+	/** Scale of the images.*/
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FVector2D Scale = FVector2D(1.0f, 1.0f);
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FMargin Padding = FMargin();
 	
+	/**
+	 * Time in second to update the images, the smaller value the faster of the animation. A zero value will update the images every frame.
+	 */
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (UIMax = 1.00, UIMin = 0.00, ClampMin = "0", ClampMax = "1"))
+	float Speed = 0.05f;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bHideLoadingWidgetWhenCompletes = true;
 };
 
 
@@ -77,9 +90,11 @@ struct LOADINGSCREEN_API FLevelLoadingScreenSettings
 {
 	GENERATED_BODY()
 	
-	// The scaling type to apply to images.
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Level loading")
 	FBackgroundSettings BackgroundSettings;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Level loading")
+	FImageSequenceSettings ImageSequenceSettings;
 	
 };
 
