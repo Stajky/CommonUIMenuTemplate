@@ -4,7 +4,48 @@
 #include "Engine/DeveloperSettings.h"
 #include "UObject/ConstructorHelpers.h"
 #include "MoviePlayer.h"
+#include "Widgets/Layout/SScaleBox.h"
 #include "LoadingScreenSettings.generated.h"
+
+
+
+/**
+ * Background widget for the widget loading screen
+ */
+USTRUCT(BlueprintType)
+struct LOADINGSCREEN_API FBackgroundSettings
+{
+	GENERATED_BODY()
+
+	// The images randomly display while in the loading screen on top of the movie 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Background", meta = (AllowedClasses = "/Script/Engine.Texture2D"))
+	FSoftObjectPath ImagePath;
+
+	// The scaling type to apply to images.
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Background")
+	TEnumAsByte<EStretch::Type> ImageStretch = EStretch::ScaleToFit;
+	
+	// The border's background color if there is any image defined. If padding = 0 you will not see the border color.
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Background")
+	FSlateColor Tint = FLinearColor::White;
+	
+};
+
+/**
+ * Background widget for the widget loading screen
+ */
+USTRUCT(BlueprintType)
+struct LOADINGSCREEN_API FImageSequenceSSettings
+{
+	GENERATED_BODY()
+
+	// The images randomly display while in the loading screen on top of the movie 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Background", meta = (AllowedClasses = "/Script/Engine.Texture2D"))
+	FSoftObjectPath ImagePath;
+
+
+	
+};
 
 
 
@@ -32,9 +73,13 @@ struct LOADINGSCREEN_API FStartupLoadingScreenSettings
 };
 
 USTRUCT(BlueprintType)
-struct LOADINGSCREEN_API FDefaultLevelLoadingScreenSettings
+struct LOADINGSCREEN_API FLevelLoadingScreenSettings
 {
 	GENERATED_BODY()
+	
+	// The scaling type to apply to images.
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Level loading")
+	FBackgroundSettings BackgroundSettings;
 	
 };
 
@@ -55,12 +100,12 @@ public:
 	/**
 	 * The startup loading screen when you first open the game. Setup any studio logo movies here.
 	 */
-	UPROPERTY(Config, EditAnywhere, Category = "General")
+	UPROPERTY(Config, EditAnywhere, BlueprintReadOnly, Category = "General")
 	FStartupLoadingScreenSettings StartupLoadingScreen;
 
 	/**
 	 * The default loading screen that shows up whenever you open a new level.
 	 */
-	UPROPERTY(Config, EditAnywhere, Category = "General")
-	FDefaultLevelLoadingScreenSettings DefaultLevelLoadingScreen;
+	UPROPERTY(Config, EditAnywhere, BlueprintReadOnly, Category = "General")
+	FLevelLoadingScreenSettings DefaultLevelLoadingScreen;
 };

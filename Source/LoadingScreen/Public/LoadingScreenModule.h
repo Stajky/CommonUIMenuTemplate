@@ -4,6 +4,7 @@
 
 struct FStartupLoadingScreenSettings;
 
+
 class FLoadingScreenModule : public IModuleInterface
 {
 public:
@@ -29,4 +30,8 @@ public:
 
 private:
 	void SetupStartupLoadingScreen(const FStartupLoadingScreenSettings& LoadingScreenSettings);
+
+
+
+	
 };

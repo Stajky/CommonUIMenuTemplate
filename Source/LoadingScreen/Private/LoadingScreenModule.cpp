@@ -27,6 +27,7 @@ void FLoadingScreenModule::SetupStartupLoadingScreen(const FStartupLoadingScreen
 	// In this project for startup we only consider using the movies so no widget is set for the Movie Player
 	FLoadingScreenAttributes LSAttributes;
 	LSAttributes.bMoviesAreSkippable = StartupLoadingScreenSettings.bMoviesAreSkippable;
+	LSAttributes.bAutoCompleteWhenLoadingCompletes = false;
 	LSAttributes.MoviePaths = StartupLoadingScreenSettings.MoviePaths;
 	
 	GetMoviePlayer()->SetupLoadingScreen(LSAttributes);
