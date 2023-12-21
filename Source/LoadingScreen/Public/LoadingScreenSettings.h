@@ -5,7 +5,9 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Widgets/Layout/SScaleBox.h"
 #include "Layout/Margin.h"
+#include "Templates/SharedPointer.h"
 #include "LoadingScreenSettings.generated.h"
+
 
 
 
@@ -60,12 +62,45 @@ struct LOADINGSCREEN_API FImageSequenceSettings
 	bool bHideLoadingWidgetWhenCompletes = true;
 };
 
-
-
+/**
+ * Background widget for the widget loading screen
+ */
 USTRUCT(BlueprintType)
+struct LOADINGSCREEN_API FTipPanelSettings
+{
+	GENERATED_BODY()
+
+	/** An array of images for animating the loading icon.*/
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (AllowedClasses = "/Script/Engine.Texture2D"))
+	UTexture2D* Image = nullptr;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray<FText> Tips;
+	
+	/** Scale of the images.*/
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FVector2D Size = FVector2D(1.0f, 1.0f);
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FMargin Padding = FMargin();
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FMargin TextPadding = FMargin();
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FSlateFontInfo Font = FSlateFontInfo();
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float TooltipChangeSpeed = 4.0f;
+
+	
+};
+
+
 /**
  * These are essentialy just settings for default movie player for startup of the game
  **/
+USTRUCT(BlueprintType)
 struct LOADINGSCREEN_API FStartupLoadingScreenSettings
 {
 	GENERATED_BODY()
@@ -95,7 +130,9 @@ struct LOADINGSCREEN_API FLevelLoadingScreenSettings
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Level loading")
 	FImageSequenceSettings ImageSequenceSettings;
-	
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Level loading")
+	FTipPanelSettings TipPanelSettings;
 };
 
 

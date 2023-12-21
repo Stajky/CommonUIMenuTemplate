@@ -3,6 +3,7 @@
 #include "SWidgets/SLoadingScreenBackground.h"
 #include "..\..\Public\SWidgets\STestLoadingScreen.h"
 #include "SWidgets/SImageSequenceLoading.h"
+#include "SWidgets/STipPanel.h"
 
 void SLevelLoadingScreen::Construct(const FArguments& InArgs)
 {
@@ -17,7 +18,16 @@ void SLevelLoadingScreen::Construct(const FArguments& InArgs)
 		[
 			SNew(SLoadingScreenBackground).Settings(Settings.BackgroundSettings)
 		];
-
+	
+	// Add tip panel
+	Root->AddSlot()
+	.HAlign(HAlign_Center)
+	.VAlign(VAlign_Bottom)
+	.Padding(Settings.TipPanelSettings.Padding)
+	[
+	SNew(STipPanel).Settings(Settings.TipPanelSettings)
+	];
+	
 	//Add image sequence
 	Root->AddSlot()
 	.HAlign(HAlign_Right)
@@ -26,8 +36,6 @@ void SLevelLoadingScreen::Construct(const FArguments& InArgs)
 	[
 		SNew(SImageSequenceLoading).Settings(Settings.ImageSequenceSettings)
 	];
-
-
 	
 	ChildSlot
 	[
