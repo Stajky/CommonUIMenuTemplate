@@ -49,6 +49,7 @@ struct LOADINGSCREEN_API FImageSequenceSettings
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FVector2D Scale = FVector2D(1.0f, 1.0f);
 
+	/** Padding of the whole image sequence.*/
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FMargin Padding = FMargin();
 	
@@ -70,14 +71,15 @@ struct LOADINGSCREEN_API FTipPanelSettings
 {
 	GENERATED_BODY()
 
-	/** An array of images for animating the loading icon.*/
+	/** Texture for the panel background.*/
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, meta = (AllowedClasses = "/Script/Engine.Texture2D"))
 	UTexture2D* Image = nullptr;
-	
+
+	/** An array of tips displayed in the tip panel */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<FText> Tips;
 	
-	/** Scale of the images.*/
+	/** Size of the tip panel.*/
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FVector2D Size = FVector2D(1.0f, 1.0f);
 
@@ -90,9 +92,11 @@ struct LOADINGSCREEN_API FTipPanelSettings
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FSlateFontInfo Font = FSlateFontInfo();
 
+	/** Essentialy time for how long the tooltip text stays before next one*/
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float TooltipChangeSpeed = 4.0f;
 
+	/** Randomly rearrange the displayed tips */
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool bShuffleTips = true;
 	

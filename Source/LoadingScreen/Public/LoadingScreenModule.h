@@ -30,8 +30,5 @@ public:
 
 private:
 	void SetupStartupLoadingScreen(const FStartupLoadingScreenSettings& LoadingScreenSettings);
-
-
-
 	
 };
