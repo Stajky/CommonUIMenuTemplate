@@ -13,6 +13,11 @@
 				"ModularGameplayActors",
 				"CommonUI"
 			]
+		},
+		{
+			"Name": "LoadingScreen",
+			"Type": "ClientOnly",
+			"LoadingPhase": "PreLoadingScreen"
 		}
 	],
 	"Plugins": [
@@ -25,6 +30,10 @@
 		},
 		{
 			"Name": "CommonUI",
+			"Enabled": true
+		},
+		{
+			"Name": "SlateInsights",
 			"Enabled": true
 		}
 	]
