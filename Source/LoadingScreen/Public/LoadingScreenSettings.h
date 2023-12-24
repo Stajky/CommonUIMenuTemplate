@@ -93,6 +93,8 @@ struct LOADINGSCREEN_API FTipPanelSettings
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float TooltipChangeSpeed = 4.0f;
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool bShuffleTips = true;
 	
 };
 

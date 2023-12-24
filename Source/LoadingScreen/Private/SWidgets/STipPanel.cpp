@@ -1,24 +1,27 @@
 ﻿#include "SWidgets/STipPanel.h"
 
+#include <random>
+
 #include "Slate/DeferredCleanupSlateBrush.h"
 
 void STipPanel::Construct(const FArguments& InArgs)
 {
 	Settings = InArgs._Settings.Get();
-
-	//TODO shuffle the tips list so that we get random sequence of tips
 	
 	if(!Settings.Image)
 		return;
 	PanelImage = FDeferredCleanupSlateBrush::CreateBrush(Settings.Image, FVector2D(1024,150));
-
+	
+	Tips = Settings.Tips;
+	//Shuffle the tips if we want to
+	if(Settings.bShuffleTips)
+		ShuffleTips(Tips);
+	
 	//create textblock as an variable so that we can set it in OnPaint
-
-	FText text = Settings.Tips.IsEmpty() ? FText::FromString(TEXT("Default Text")) : Settings.Tips[0];
+	FText text = Settings.Tips.IsEmpty() ? FText::FromString(TEXT("Default Text")) : Tips[0];
 	TextBlock = SNew(STextBlock)
 				.Text(text)
 				.Font(Settings.Font);
-	
 	ChildSlot
 	[
 		SNew(SBox)
@@ -52,20 +55,43 @@ int32 STipPanel::OnPaint(const FPaintArgs& Args, const FGeometry& AllottedGeomet
 {
 	//After some delta time change the tooltip
 	TotalDeltaTime += Args.GetDeltaTime();
-	if (!Settings.Tips.IsEmpty() && TotalDeltaTime >= Settings.TooltipChangeSpeed)
+	if (!Tips.IsEmpty() && TotalDeltaTime >= Settings.TooltipChangeSpeed)
 	{
 		TotalDeltaTime = 0;
 		TooltipIndex++;
 		
 		//reset back to start
-		if (TooltipIndex >= Settings.Tips.Num())
+		if (TooltipIndex >= Tips.Num())
 		{
 			TooltipIndex = 0;
 		}
 		
-		TextBlock->SetText(Settings.Tips[TooltipIndex]);
+		TextBlock->SetText(Tips[TooltipIndex]);
 	}
 	
 	return SCompoundWidget::OnPaint(Args, AllottedGeometry, MyCullingRect, OutDrawElements, LayerId, InWidgetStyle,
 	                                bParentEnabled);
 }
+
+
+void STipPanel::ShuffleTips(TArray<FText>& TipsToShuffle)
+{
+	int32 LastIndex = TipsToShuffle.Num() - 1;
+
+	// //get random generator
+	// std::random_device rd;
+	// std::mt19937 gen(rd());
+	// std::uniform_int_distribution<> distrib(0, LastIndex); 
+	
+	for (int32 i = 0; i < LastIndex; ++i)
+	{
+		int32 Index = FMath::RandRange(0, LastIndex);
+		if (i != Index)
+		{
+			TipsToShuffle.Swap(i, Index);
+		}
+	}
+	
+}
+
+
