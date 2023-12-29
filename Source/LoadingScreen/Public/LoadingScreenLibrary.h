@@ -21,5 +21,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Loading)
 	static void StartLoadingScreen(const FLevelLoadingScreenSettings& Settings, float MinimumLoadingScreenDisplayTime);
-	
+
+
+	UFUNCTION(BlueprintCallable, Category = Loading)
+	static void StopLoadingScreen();
 };

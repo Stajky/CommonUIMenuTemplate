@@ -25,7 +25,8 @@ public class CommonUIMenuTemplate : ModuleRules
 			"GameplayTags",
 			"ModularGameplay",
 			"ModularGameplayActors",
-			"UMG"
+			"UMG",
+			"EnhancedInput",
 
 			
 		});
