@@ -30,7 +30,7 @@ public:
 	virtual void SetListeningForInput(bool bShouldListen);
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void BP_HandleInputAction();
+	void BP_HeldProgressEvent(float HeldPercent);
 
 
 protected:
@@ -42,8 +42,9 @@ protected:
 private:
 	void UpdateBindings();
 
-	void SkipButtonPressedNative() const;
-	void SkipButtonReleasedNative() const;
+	void NativeSkipButtonPressed() const;
+
+	void NativeHeldProgress(float HeldPercent);
 	
 protected:
 	/** Whether to register input immediately upon construction */
@@ -60,14 +61,9 @@ protected:
 
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FSkipButtonPressed OnSkipButtonPressed;
-
-	UPROPERTY(BlueprintAssignable, Category = "Events")
-	FSkipButtonReleased OnSkipButtonReleased;
 	
 private:
 	bool bIsListeningForInput = false;
 
 	FUIActionBindingHandle InputActionHandlePressed;
-	FUIActionBindingHandle InputActionHandleReleased
-	;
 };

@@ -9,7 +9,6 @@ void USkipButton::SetListeningForInput(bool bShouldListen)
 {
 	if (GetUISubsystem() == nullptr)
 	{
-		// Shutting down
 		return;
 	}
 
@@ -38,48 +37,39 @@ void USkipButton::NativeDestruct()
 
 void USkipButton::UpdateBindings()
 
-{	// New input system binding flow
+{	
 	if (bIsListeningForInput)
 	{
 		const bool bIsEnhancedInputSupportEnabled = CommonUI::IsEnhancedInputSupportEnabled();
 		if (bIsEnhancedInputSupportEnabled && EnhancedInputAction)
 		{
 			FBindUIActionArgs args = FBindUIActionArgs(EnhancedInputAction, false,
-			                                           FSimpleDelegate::CreateUObject(this, &USkipButton::SkipButtonPressedNative));
+			                                           FSimpleDelegate::CreateUObject(this, &USkipButton::NativeSkipButtonPressed));
 			args.KeyEvent = IE_Pressed;
+			args.OnHoldActionProgressed.BindUObject(this, &USkipButton::NativeHeldProgress);
 			InputActionHandlePressed = RegisterUIActionBinding(args);
-
-			args = FBindUIActionArgs(EnhancedInputAction, false,
-			 	FSimpleDelegate::CreateUObject(this, &USkipButton::SkipButtonReleasedNative));
-			args.KeyEvent = IE_Released;
-			InputActionHandleReleased = RegisterUIActionBinding(args);
 		}
 		else
 		{
 			FBindUIActionArgs args = FBindUIActionArgs(InputAction, false,
-			                                           FSimpleDelegate::CreateUObject(this, &USkipButton::SkipButtonPressedNative));
+			                                           FSimpleDelegate::CreateUObject(this, &USkipButton::NativeSkipButtonPressed));
 			args.KeyEvent = IE_Pressed;
+			args.OnHoldActionProgressed.BindUObject(this, &USkipButton::NativeHeldProgress);
 			InputActionHandlePressed = RegisterUIActionBinding(args);
-
-			args = FBindUIActionArgs(InputAction, false,
-				FSimpleDelegate::CreateUObject(this, &USkipButton::SkipButtonReleasedNative));
-			args.KeyEvent = IE_Released;
-			InputActionHandleReleased = RegisterUIActionBinding(args);
 		}
 	}
 	else
 	{
 		InputActionHandlePressed.Unregister();
-		InputActionHandleReleased.Unregister();
 	}
 }
 
-void USkipButton::SkipButtonReleasedNative() const
+void USkipButton::NativeHeldProgress(float HeldPercent)
 {
-	OnSkipButtonReleased.Broadcast();
+	BP_HeldProgressEvent(HeldPercent);
 }
 
-void USkipButton::SkipButtonPressedNative() const
+void USkipButton::NativeSkipButtonPressed() const
 {
 	OnSkipButtonPressed.Broadcast();
 }
