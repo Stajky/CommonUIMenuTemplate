@@ -8,7 +8,7 @@
 #include "CommonUIMenuTemplate/CmtGameplayTags.h"
 #include "InputMappingContext.h"
 #include "PlayerMappableInputConfig.h"
-#include "CommonUIMenuTemplate/CmtHelpers.h"
+#include "CommonUIMenuTemplate/CmtLibrary.h"
 #include "GameFramework/FloatingPawnMovement.h"
 
 
@@ -19,17 +19,9 @@ ACmtPlayerPawn::ACmtPlayerPawn()
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = false;
 	
-	// Xcgs is an RTS style input by default, so player pawn should never affect navigation
 	bCanAffectNavigationGeneration = false;
 
 	CharacterMovement = CreateDefaultSubobject<UFloatingPawnMovement>("Character Movement Component");
-	// //Setting class variables of the Character movement component
-	// CharacterMovement->bOrientRotationToMovement = true;
-	// CharacterMovement->bUseControllerDesiredRotation = true;
-	// CharacterMovement->bIgnoreBaseRotation = true;
-	
-	CameraOffset = FVector::ZeroVector;
-	ZoomVelocity = 10.f;
 }
 
 // Called when the game starts or when spawned
@@ -39,16 +31,6 @@ void ACmtPlayerPawn::BeginPlay()
 	
 }
 
-void ACmtPlayerPawn::CalcCamera(float DeltaTime, FMinimalViewInfo& OutResult)
-{
-	// DONT call super this is COMPLETE override
-	// Super::CalcCamera(DeltaTime, OutResult);
-
-	GetActorEyesViewPoint(OutResult.Location, OutResult.Rotation);
-
-	//Add Zoom
-	OutResult.Location += CameraOffset;
-}
 
 void ACmtPlayerPawn::UnbindInputValueActions()
 {
@@ -93,6 +75,8 @@ void ACmtPlayerPawn::BindInputValueAction(UEnhancedInputComponent* EnhancedInput
 void ACmtPlayerPawn::Input_Look(const FInputActionValue& InputActionValue)
 {	
 	const FVector2D Value = InputActionValue.Get<FVector2D>();
+
+	UE_LOG(LogTemp, Warning, TEXT("(%f , %f)"), Value.X, Value.Y);
 	
 	if (Value.X != 0.0f)
 	{
@@ -126,22 +110,13 @@ void ACmtPlayerPawn::Input_Move(const FInputActionValue& InputActionValue)
 	}
 }
 
-void ACmtPlayerPawn::Input_Zoom(const FInputActionValue& InputActionValue)
-{
-	// Get the non-normalized value
-	// (usually this is 1.0 or -1.0 but it can/does sometimes go to 2, 3, ...)
-	const float Value = InputActionValue.Get<float>();
-
-	CameraOffset.Z = FMath::Clamp(CameraOffset.Z + (Value * ZoomVelocity), 0.f, 500.f);
-}
-
 void ACmtPlayerPawn::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 	
 	if(const APlayerController* PC = Cast<APlayerController>(NewController))
 	{
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem  = UCmtHelpers::GetEnhancedInputLocalPlayerSubsystem(PC))
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem  = UCmtLibrary::GetEnhancedInputLocalPlayerSubsystem(PC))
 		{
 			UE_LOG(LogTemp, Display, TEXT("Clearing all input mappings"));
 			Subsystem->ClearAllMappings();
@@ -165,10 +140,8 @@ void ACmtPlayerPawn::PossessedBy(AController* NewController)
 
 void ACmtPlayerPawn::UnPossessed()
 {
-	Super::UnPossessed();
-
 	// Remove any EnhancedInput IMCs
-	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = UCmtHelpers::GetEnhancedInputLocalPlayerSubsystem(GetController<APlayerController>()))
+	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = UCmtLibrary::GetEnhancedInputLocalPlayerSubsystem(GetController<APlayerController>()))
 	{
 		UE_LOG(LogTemp, Display, TEXT("Clearing input mappings"));
 		Subsystem->ClearAllMappings();
@@ -176,6 +149,8 @@ void ACmtPlayerPawn::UnPossessed()
 
 	// Unbind from EnhancedInput
 	UnbindInputValueActions();
+
+	Super::UnPossessed();
 }
 
 // Called to bind functionality to input
@@ -200,7 +175,6 @@ void ACmtPlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	// Look and Zoom should update every tick while Triggered
 	BindInputValueAction(EnhancedInput, CmtTag::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
 	BindInputValueAction(EnhancedInput, CmtTag::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
-	BindInputValueAction(EnhancedInput, CmtTag::InputTag_Zoom, ETriggerEvent::Triggered, this, &ThisClass::Input_Zoom);
 	
 }
 

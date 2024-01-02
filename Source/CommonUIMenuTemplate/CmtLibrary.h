@@ -4,18 +4,18 @@
 
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "CmtHelpers.generated.h"
+#include "CmtLibrary.generated.h"
 
 class UEnhancedInputLocalPlayerSubsystem;
 /**
  * 
  */
 UCLASS()
-class COMMONUIMENUTEMPLATE_API UCmtHelpers : public UBlueprintFunctionLibrary
+class COMMONUIMENUTEMPLATE_API UCmtLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 public:
-	UCmtHelpers() {}
+	UCmtLibrary() {}
 
 	/**
 	 * Get the EnhancedInput LocalPlayer Subsystem for the player represented by PlayerController
@@ -24,4 +24,7 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable)
 	static UEnhancedInputLocalPlayerSubsystem* GetEnhancedInputLocalPlayerSubsystem(const APlayerController* PlayerController);
+
+	UFUNCTION(BlueprintCallable)
+	static void CmtSetInputMode(APlayerController* PlayerController, bool bMouseVisible, bool bIgnoreLookInput, bool bIgnoreMoveInput);
 };

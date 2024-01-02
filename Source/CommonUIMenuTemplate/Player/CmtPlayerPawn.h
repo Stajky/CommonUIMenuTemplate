@@ -26,7 +26,6 @@ public:
 protected:
 	//~Actor interface
 	virtual void BeginPlay() override;
-	virtual void CalcCamera(float DeltaTime, FMinimalViewInfo& OutResult) override;
 	//~ End of Actor
 
 	template<class UserClass, typename... VarTypes>
@@ -35,7 +34,6 @@ protected:
 	
 	void Input_Look(const FInputActionValue& InputActionValue);
 	void Input_Move(const FInputActionValue& InputActionValue);
-	void Input_Zoom(const FInputActionValue& InputActionValue);
 	
 public:
 
@@ -46,9 +44,6 @@ public:
 	//~End of APawn Interface
 	
 protected:
-	/** Speed at which Zoom changes */
-	UPROPERTY(EditDefaultsOnly)
-	float ZoomVelocity;
 
 	/** Config of IMC with priority */
 	UPROPERTY(EditDefaultsOnly)
@@ -61,11 +56,8 @@ protected:
 
 private:
 	UPROPERTY(Transient, VisibleInstanceOnly)
-	FVector CameraOffset;
-
-	UPROPERTY(Transient, VisibleInstanceOnly)
 	TSet<int32> InputEventBindingHandles;
-	//
+	
 	/** Movement component used for movement logic in various movement modes (walking, falling, etc), containing relevant settings and functions to control movement. */
 	UPROPERTY(Category=Movement, VisibleAnywhere, BlueprintReadOnly, meta=(AllowPrivateAccess = "true"))
 	TObjectPtr<UFloatingPawnMovement> CharacterMovement;
