@@ -6,6 +6,5 @@
 ACmtPlayerState::ACmtPlayerState(const FObjectInitializer& ObjectInitializer)
 : Super(ObjectInitializer)
 {
-	// TODO FIXME
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 }
