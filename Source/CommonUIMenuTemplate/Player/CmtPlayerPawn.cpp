@@ -34,6 +34,8 @@ void ACmtPlayerPawn::BeginPlay()
 
 void ACmtPlayerPawn::UnbindInputValueActions()
 {
+	UE_LOG(LogTemp, Error, TEXT("UnbindInputValueActions() called"));
+	
 	UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(InputComponent);
 	if (!ensure(EnhancedInput))
 	{
@@ -75,8 +77,6 @@ void ACmtPlayerPawn::BindInputValueAction(UEnhancedInputComponent* EnhancedInput
 void ACmtPlayerPawn::Input_Look(const FInputActionValue& InputActionValue)
 {	
 	const FVector2D Value = InputActionValue.Get<FVector2D>();
-
-	UE_LOG(LogTemp, Warning, TEXT("(%f , %f)"), Value.X, Value.Y);
 	
 	if (Value.X != 0.0f)
 	{
@@ -97,7 +97,6 @@ void ACmtPlayerPawn::Input_Move(const FInputActionValue& InputActionValue)
 	{
 		// Quaternion AxisY is the "right" vector
 		FVector RightVector = GetControlRotation().Quaternion().GetAxisY();
-		// RightVector.Z = 0.f;  // constrain Z
 		AddMovementInput(RightVector, Value.X);
 	}
 
@@ -105,7 +104,6 @@ void ACmtPlayerPawn::Input_Move(const FInputActionValue& InputActionValue)
 	{
 		// Quaternion AxisX is the "forward" vector
 		FVector ForwardVector = GetControlRotation().Quaternion().GetAxisX();
-		// ForwardVector.Z = 0.f;  // constrain Z
 		AddMovementInput(ForwardVector, Value.Y);
 	}
 }
