@@ -14,7 +14,8 @@ public class CommonUIMenuTemplate : ModuleRules
 			"CoreUObject", 
 			"Engine", 
 			"InputCore",
-			"LoadingScreen"
+			"LoadingScreen",
+			"SaveSystem"
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[]
