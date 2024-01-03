@@ -27,6 +27,8 @@ public class CommonUIMenuTemplate : ModuleRules
 			"ModularGameplayActors",
 			"UMG",
 			"EnhancedInput",
+			"Slate",
+			"SlateCore"
 
 			
 		});
