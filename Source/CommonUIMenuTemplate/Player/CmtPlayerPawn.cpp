@@ -34,8 +34,6 @@ void ACmtPlayerPawn::BeginPlay()
 
 void ACmtPlayerPawn::UnbindInputValueActions()
 {
-	UE_LOG(LogTemp, Error, TEXT("UnbindInputValueActions() called"));
-	
 	UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(InputComponent);
 	if (!ensure(EnhancedInput))
 	{
