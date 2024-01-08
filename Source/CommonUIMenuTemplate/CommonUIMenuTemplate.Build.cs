@@ -15,7 +15,9 @@ public class CommonUIMenuTemplate : ModuleRules
 			"Engine", 
 			"InputCore",
 			"LoadingScreen",
-			"SaveSystem"
+			"SaveSystem",
+			"SPUD"
+			
 		});
 
 		PrivateDependencyModuleNames.AddRange(new string[]
@@ -30,10 +32,8 @@ public class CommonUIMenuTemplate : ModuleRules
 			"EnhancedInput",
 			"Slate",
 			"SlateCore"
-
-			
 		});
-
+		
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		
