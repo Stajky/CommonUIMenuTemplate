@@ -33,3 +33,8 @@ TOptional<FUIInputConfig> UCmtActivatableWidget::GetDesiredInputConfig() const
 
 	return ConfigOverride;
 }
+
+void UCmtActivatableWidget::BP_RefreshFocus()
+{
+	RequestRefreshFocus();
+}

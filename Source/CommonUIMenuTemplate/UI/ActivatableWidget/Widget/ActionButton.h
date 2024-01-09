@@ -7,11 +7,11 @@
 
 
 #include "Engine/DataTable.h"
-#include "SkipButton.generated.h"
+#include "ActionButton.generated.h"
 
 class UInputAction;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSkipButtonPressed);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FActionButtonPressed);
 // DECLARE_DELEGATE(FSkipButtonPressed);
 // DECLARE_DELEGATE(FSkipButtonReleased);
 
@@ -19,18 +19,14 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSkipButtonPressed);
  * 
  */
 UCLASS(Blueprintable, ClassGroup = UI, meta = (Category = "CmtUI", DisableNativeTick))
-class COMMONUIMENUTEMPLATE_API USkipButton : public UCommonUserWidget
+class COMMONUIMENUTEMPLATE_API UActionButton : public UCommonUserWidget
 {
 	GENERATED_BODY()
 
 public:
 
-	UFUNCTION(BlueprintCallable, Category = TabList)
+	UFUNCTION(BlueprintCallable, Category = ActionButton)
 	virtual void SetListeningForInput(bool bShouldListen);
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void BP_HeldProgressEvent(float HeldPercent);
-
 
 protected:
 	// UUserWidget interface
@@ -41,25 +37,23 @@ protected:
 private:
 	void UpdateBindings();
 
-	void NativeSkipButtonPressed() const;
-
-	void NativeHeldProgress(float HeldPercent);
+	void NativeButtonPressed() const;
 	
 protected:
 	/** Whether to register input immediately upon construction */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = SkipButton, meta = (ExposeOnSpawn = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = ActionButton, meta = (ExposeOnSpawn = "true"))
 	bool bAutoListenForInput;
 
 	/** The input action to listen for causing the skip */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = SkipButton, meta = (RowType = "/Script/CommonUI.CommonInputActionDataBase"))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = ActionButton, meta = (RowType = "/Script/CommonUI.CommonInputActionDataBase"))
 	FDataTableRowHandle InputAction;
 
 	/** The input action to listen for causing the skip */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = SkipButton, meta = (EditCondition = "CommonInput.CommonInputSettings.IsEnhancedInputSupportEnabled", EditConditionHides))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = ActionButton, meta = (EditCondition = "CommonInput.CommonInputSettings.IsEnhancedInputSupportEnabled", EditConditionHides))
 	TObjectPtr<UInputAction> EnhancedInputAction;
 
 	UPROPERTY(BlueprintAssignable, Category = "Events")
-	FSkipButtonPressed OnSkipButtonPressed;
+	FActionButtonPressed OnActionPressed;
 	
 private:
 	bool bIsListeningForInput = false;
