@@ -24,7 +24,7 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable)
 	static UEnhancedInputLocalPlayerSubsystem* GetEnhancedInputLocalPlayerSubsystem(const APlayerController* PlayerController);
-
+	
 	UFUNCTION(BlueprintCallable)
 	static void CmtSetMouseInputMode(APlayerController* PlayerController, bool bMouseVisible, bool bIgnoreLookInput, bool bIgnoreMoveInput);
 };
