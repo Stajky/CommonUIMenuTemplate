@@ -11,6 +11,11 @@ namespace CmtTag
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Look,          "InputTag.Look", "Player Look");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Move,          "InputTag.Move", "Player Move");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Zoom,          "InputTag.Zoom", "Zoom Camera");
+
+
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GMSChannel_UI, "GMSChannel.UI", "Gameplay Message System UI channel");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Modal_Save, "UI.Modal.SaveOverride", "Modal Save Override Message");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Modal_Delete, "UI.Modal.Delete", "Modal Delete Message");
 }
 
 UInputActionToTagMap::UInputActionToTagMap(const FObjectInitializer& ObjectInitializer)
