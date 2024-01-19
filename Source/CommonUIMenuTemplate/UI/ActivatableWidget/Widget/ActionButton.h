@@ -12,8 +12,6 @@
 class UInputAction;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FActionButtonPressed);
-// DECLARE_DELEGATE(FSkipButtonPressed);
-// DECLARE_DELEGATE(FSkipButtonReleased);
 
 /**
  * 
