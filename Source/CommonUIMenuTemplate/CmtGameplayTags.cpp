@@ -14,8 +14,10 @@ namespace CmtTag
 
 
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GMSChannel_UI, "GMSChannel.UI", "Gameplay Message System UI channel");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Modal_Save, "UI.Modal.SaveOverride", "Modal Save Override Message");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Modal_Delete, "UI.Modal.Delete", "Modal Delete Message");
+
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Modal_ConfirmLoad, "UI.Modal.ConfirmLoad", "UI Modal Confirm Load Message");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Modal_ConfirmSave, "UI.Modal.ConfirmSave", "UI Modal Confirm Save Message");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Modal_ConfirmDelete, "UI.Modal.ConfirmDelete", "UI Modal Confirm Delete Message");
 }
 
 UInputActionToTagMap::UInputActionToTagMap(const FObjectInitializer& ObjectInitializer)
