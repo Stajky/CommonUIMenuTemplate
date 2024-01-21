@@ -4,6 +4,7 @@
 #include "ActionButton.h"
 #include "CommonUITypes.h"
 #include "Input/CommonUIInputTypes.h"
+#include "CommonActionWidget.h"
 
 void UActionButton::SetListeningForInput(bool bShouldListen)
 {
@@ -27,6 +28,8 @@ void UActionButton::NativeConstruct()
 	{
 		SetListeningForInput(true);
 	}
+
+	RefreshInputActionIconValue();
 }
 
 void UActionButton::NativeDestruct()
@@ -47,6 +50,7 @@ void UActionButton::UpdateBindings()
 			                                           FSimpleDelegate::CreateUObject(this, &UActionButton::NativeButtonPressed));
 			args.KeyEvent = IE_Pressed;
 			InputActionHandlePressed = RegisterUIActionBinding(args);
+
 		}
 		else
 		{
@@ -59,6 +63,19 @@ void UActionButton::UpdateBindings()
 	else
 	{
 		InputActionHandlePressed.Unregister();
+	}
+}
+
+void UActionButton::RefreshInputActionIconValue()
+{
+	const bool bIsEnhancedInputSupportEnabled = CommonUI::IsEnhancedInputSupportEnabled();
+	if (bIsEnhancedInputSupportEnabled && EnhancedInputAction)
+	{
+		InputActionIcon->SetEnhancedInputAction(EnhancedInputAction);
+	}
+	else
+	{
+		InputActionIcon->SetInputAction(InputAction);
 	}
 }
 

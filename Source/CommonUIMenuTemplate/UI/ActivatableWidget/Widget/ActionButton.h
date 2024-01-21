@@ -4,12 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "CommonUserWidget.h"
-
-
 #include "Engine/DataTable.h"
 #include "ActionButton.generated.h"
 
 class UInputAction;
+class UCommonActionWidget;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FActionButtonPressed);
 
@@ -35,6 +34,8 @@ protected:
 private:
 	void UpdateBindings();
 
+	void RefreshInputActionIconValue();
+
 	void NativeButtonPressed() const;
 	
 protected:
@@ -53,6 +54,9 @@ protected:
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FActionButtonPressed OnActionPressed;
 	
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	UCommonActionWidget* InputActionIcon;
+
 private:
 	bool bIsListeningForInput = false;
 
