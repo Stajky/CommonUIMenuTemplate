@@ -35,6 +35,10 @@ public:
 	//~UCommonActivatableWidget interface
 	virtual TOptional<FUIInputConfig> GetDesiredInputConfig() const override;
 	//~End of UCommonActivatableWidget interface
+
+
+	UFUNCTION(BlueprintCallable)
+	virtual void BP_RefreshFocus(); 
 	
 protected:
 	/** The desired input mode to use while this UI is activated, for example do you want key presses to still reach the game/player controller? */

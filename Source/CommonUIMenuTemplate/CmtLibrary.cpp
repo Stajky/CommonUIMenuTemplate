@@ -19,8 +19,9 @@ UEnhancedInputLocalPlayerSubsystem* UCmtLibrary::GetEnhancedInputLocalPlayerSubs
 	return nullptr;
 }
 
+
 void UCmtLibrary::CmtSetMouseInputMode(APlayerController* PlayerController, bool bMouseVisible, bool bIgnoreLookInput,
-	bool bIgnoreMoveInput)
+                                       bool bIgnoreMoveInput)
 {
 	// You must give us a valid PlayerController
 	if (!IsValid(PlayerController))
