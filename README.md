@@ -10,6 +10,7 @@ Road map:
 - [ ] Player HUD
 - [ ] Mock GAS-like communication for player HUD
 - [ ] Pause menu
+- [ ] Settings
 - [ ] Write summary about CommonUI
 
 
