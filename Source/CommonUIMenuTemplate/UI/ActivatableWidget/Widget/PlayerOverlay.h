@@ -13,4 +13,6 @@ UCLASS()
 class COMMONUIMENUTEMPLATE_API UPlayerOverlay : public UCmtActivatableWidget_WithController
 {
 	GENERATED_BODY()
+public:
+	
 };
