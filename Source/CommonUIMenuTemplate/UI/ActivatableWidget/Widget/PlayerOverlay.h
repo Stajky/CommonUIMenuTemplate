@@ -14,5 +14,5 @@ class COMMONUIMENUTEMPLATE_API UPlayerOverlay : public UCmtActivatableWidget_Wit
 {
 	GENERATED_BODY()
 public:
-	
+	virtual void NativeConstruct() override;
 };

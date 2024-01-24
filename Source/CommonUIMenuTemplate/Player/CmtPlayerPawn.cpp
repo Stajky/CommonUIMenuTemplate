@@ -3,6 +3,8 @@
 
 #include "CmtPlayerPawn.h"
 
+#include "CmtPlayerController.h"
+#include "CmtPlayerState.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameplayTagContainer.h"
 #include "CommonUIMenuTemplate/CmtGameplayTags.h"
@@ -129,7 +131,6 @@ void ACmtPlayerPawn::PossessedBy(AController* NewController)
 					Subsystem->AddMappingContext(Imc, Priority, Options);
 				}
 			}
-			
 		}
 	}
 }
@@ -173,4 +174,5 @@ void ACmtPlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	BindInputValueAction(EnhancedInput, CmtTag::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
 	
 }
+
 

@@ -9,6 +9,11 @@
 
 class UCmtWidgetController;
 
+
+
+
+
+
 /**
  * 
  */
@@ -19,7 +24,16 @@ class COMMONUIMENUTEMPLATE_API UCmtActivatableWidget_WithController : public UCm
 public:
 	UCmtActivatableWidget_WithController(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
-private:
-	UPROPERTY(EditDefaultsOnly)
+	UFUNCTION(BlueprintCallable)
+	void SetController(UCmtWidgetController* NewController);
+
+	UFUNCTION(BlueprintCallable)
+	UCmtWidgetController* GetController() const;
+
+protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	TObjectPtr<UCmtWidgetController> Controller;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void BP_OnSetController();
 };

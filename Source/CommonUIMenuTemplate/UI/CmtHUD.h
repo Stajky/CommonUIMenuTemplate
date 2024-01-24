@@ -6,6 +6,10 @@
 #include "GameFramework/HUD.h"
 #include "CmtHUD.generated.h"
 
+class APlayerController;
+class UPlayerOverlay;
+class UPlayerOverlayController;
+
 /**
  * Modular HUD
  */
@@ -25,4 +29,25 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 	//~End of AActor interface
+
+	UPlayerOverlayController* GetPlayerOverlayWidgetController();
+
+	UFUNCTION(BlueprintCallable)
+	void ShowPlayerOverlay();
+
+private:
+	void InitPlayerOverlayController(APlayerController* PC);
+	
+protected:
+	UPROPERTY()
+	TObjectPtr<UPlayerOverlay>  PlayerOverlayWidget;	
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UPlayerOverlay> PlayerOverlayWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UPlayerOverlayController> PlayerOverlayWidgetController;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UPlayerOverlayController> PlayerOverlayWidgetControllerClass;
 };
