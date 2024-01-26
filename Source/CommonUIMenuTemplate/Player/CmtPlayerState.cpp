@@ -15,11 +15,21 @@ void ACmtPlayerState::SetLevel(int32 NewLevel)
 	OnLevelChanged.Broadcast(NewLevel);
 }
 
+int32 ACmtPlayerState::GetPlayerLevel() const
+{
+	return PlayerAttributes.Level;
+}
+
 void ACmtPlayerState::SetXP(int32 NewXP)
 {
 	//When XP changed send Broadcast new percentage
 	OnXPChanged.Broadcast(CalculateXPPercent(NewXP));
 	PlayerAttributes.XP = NewXP;
+}
+
+float ACmtPlayerState::GetXP() const
+{
+	return PlayerAttributes.XP;
 }
 
 void ACmtPlayerState::SetHealth(float NewHealth)

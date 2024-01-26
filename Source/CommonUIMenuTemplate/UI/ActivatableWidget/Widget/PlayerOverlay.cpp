@@ -6,6 +6,4 @@
 void UPlayerOverlay::NativeConstruct()
 {
 	Super::NativeConstruct();
-
-	
 }

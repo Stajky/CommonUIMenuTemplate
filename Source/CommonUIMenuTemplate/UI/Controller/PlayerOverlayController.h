@@ -26,21 +26,24 @@ public:
 	UPlayerOverlayController(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 	
 	/** ~UCmtWidgetController functions */
-	virtual void BindDataGenerators() override;
+	virtual void BindData() override;
+	virtual void UnBindData() override;
+	virtual void NativeActivateWidgetController() override;
+	virtual void NativeDeactivateWidgetController() override;
 	/** ~End of UCmtWidgetController functions */
 
-	void SetDataGeneratorsPointers(ACmtPlayerState* PS);
+	void Setup(ACmtPlayerState* PS);
 
 	UFUNCTION(BlueprintCallable)
 	FPlayerAttributes GetPlayerAttributes() const;
 	
-protected:
-
-	FORCEINLINE void SendIntMessage(FGameplayTag Tag, int32 Value) const;
-	FORCEINLINE void SendFloatMessage(FGameplayTag Tag, float Value) const;
-
 private:
 	TObjectPtr<ACmtPlayerState> PlayerState;
+
+	FDelegateHandle OnLevelChangedHandle;
+	FDelegateHandle OnXPChangedHandle;
+	FDelegateHandle OnHealthChangedHandle;
+	FDelegateHandle OnManaChangedHandle;
 };
 
 

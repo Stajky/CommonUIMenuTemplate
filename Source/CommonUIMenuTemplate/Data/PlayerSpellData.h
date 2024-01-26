@@ -20,7 +20,6 @@ public:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, SaveGame)
 	float Spell4Cooldown = 0.0f;
-
-
+	
 };
 

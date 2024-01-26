@@ -6,6 +6,8 @@
 #include "GameFramework/HUD.h"
 #include "CmtHUD.generated.h"
 
+class UCheatWindow;
+class UCheatWidgetController;
 class APlayerController;
 class UPlayerOverlay;
 class UPlayerOverlayController;
@@ -31,14 +33,18 @@ protected:
 	//~End of AActor interface
 
 	UPlayerOverlayController* GetPlayerOverlayWidgetController();
+	UCheatWidgetController* GetCheatWidgetController();
 
 	UFUNCTION(BlueprintCallable)
 	void ShowPlayerOverlay();
 
 private:
-	void InitPlayerOverlayController(APlayerController* PC);
+	void SetupPlayerOverlayController(APlayerController* PC);
+	void SetupCheatWidgetController(APlayerController* PC);
 	
 protected:
+	
+	/* ~Player Overlay Widget */
 	UPROPERTY()
 	TObjectPtr<UPlayerOverlay>  PlayerOverlayWidget;	
 
@@ -50,4 +56,21 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UPlayerOverlayController> PlayerOverlayWidgetControllerClass;
+	/* ~End of Player Overlay Widget */
+
+	
+	/* ~Cheat Widget */
+	UPROPERTY()
+	TObjectPtr<UCheatWindow>  CheatWidget;	
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UCheatWindow> CheatWidgetClass;
+	
+	UPROPERTY()
+	TObjectPtr<UCheatWidgetController> CheatWidgetController;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UCheatWidgetController> CheatWidgetControllerClass;
+	/* ~End of Cheat  Widget */
+	
 };

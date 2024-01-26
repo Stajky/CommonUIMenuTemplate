@@ -31,8 +31,14 @@ public:
 	UCmtWidgetController* GetWidgetController() const;
 
 protected:
+	/* ~UCommonActivatableWidget */ 
+	virtual void NativeOnActivated() override;
+	virtual void NativeOnDeactivated() override;
+	/* ~End of UCommonActivatableWidget */
+	
+protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
-	TObjectPtr<UCmtWidgetController> Controller;
+	TObjectPtr<UCmtWidgetController> WidgetController;
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void BP_OnSetController();

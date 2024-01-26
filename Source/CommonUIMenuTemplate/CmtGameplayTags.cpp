@@ -12,6 +12,7 @@ namespace CmtTag
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Move,          "InputTag.Move", "Player Move");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Zoom,          "InputTag.Zoom", "Zoom Camera");
 
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Cheat_F1, "InputTag.Cheat.F1", "Cheat Input for F1 key");
 
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GMSChannel_UI, "GMSChannel.UI", "Gameplay Message System UI channel");
 

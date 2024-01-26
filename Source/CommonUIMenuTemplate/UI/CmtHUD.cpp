@@ -9,7 +9,10 @@
 #include "CommonUIExtensions.h"
 #include "CommonUIMenuTemplate/CmtGameplayTags.h"
 #include "ActivatableWidget/Widget/PlayerOverlay.h"
+#include "ActivatableWidget/Widget/CheatWindow.h"
 #include "../Player/CmtPlayerState.h"
+#include "Controller/CheatWidgetController.h"
+
 
 
 // Sets default values
@@ -51,10 +54,23 @@ UPlayerOverlayController* ACmtHUD::GetPlayerOverlayWidgetController()
 	{
 		if(APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0))
 		{
-			InitPlayerOverlayController(PC);
+			SetupPlayerOverlayController(PC);
 		}
 	}
 	return PlayerOverlayWidgetController;
+}
+
+
+UCheatWidgetController* ACmtHUD::GetCheatWidgetController()
+{
+	if(!CheatWidgetController)
+	{
+		if(APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0))
+		{
+			SetupCheatWidgetController(PC);
+		}
+	}
+	return CheatWidgetController;
 }
 
 
@@ -64,35 +80,47 @@ void ACmtHUD::ShowPlayerOverlay()
 	{
 		if(ULocalPlayer* LocalPlayer = UCommonUIExtensions::GetLocalPlayerFromController(PC))
 		{
-			//Crate the widget and push it to CommonUI stack
+			//Crate the widget and push it to CommonUI stack (This will call Activate Widget)
 			UCommonActivatableWidget* PlayerOverlay = UCommonUIExtensions::PushContentToLayer_ForPlayer(
 				LocalPlayer, CmtTag::UI_Layer_Game, PlayerOverlayWidgetClass);
 
 			//Save the new reference to HUD
 			PlayerOverlayWidget = Cast<UPlayerOverlay>(PlayerOverlay);
 
-			//If we succesfully created new widget and Its controller is not yeat inicialized init the controler
+			//If we successfully created new widget and its controller is not yet initialised init the controller set it up
 			if(PlayerOverlayWidget && !PlayerOverlayWidgetController)
 			{
-				InitPlayerOverlayController(PC);
+				SetupPlayerOverlayController(PC);
 			}
-
+			
 			//Set controller pointer to widget
 			if(PlayerOverlayWidgetController)
 			{
 				PlayerOverlayWidget->SetWidgetController(PlayerOverlayWidgetController);
 			}
+
+			PlayerOverlay->ActivateWidget();
 		}
 	}
 }
 
 
-void ACmtHUD::InitPlayerOverlayController(APlayerController* PC)
+void ACmtHUD::SetupPlayerOverlayController(APlayerController* PC)
 {
 	ACmtPlayerState* PS = PC->GetPlayerState<ACmtPlayerState>();
 	check(PS);
 			
 	PlayerOverlayWidgetController = NewObject<UPlayerOverlayController>(this, PlayerOverlayWidgetControllerClass);
-	PlayerOverlayWidgetController->SetDataGeneratorsPointers(PS);
-	PlayerOverlayWidgetController->BindDataGenerators();
+	PlayerOverlayWidgetController->Setup(PS);
+	PlayerOverlayWidgetController->BindData();
+}
+
+
+void ACmtHUD::SetupCheatWidgetController(APlayerController* PC)
+{
+	ACmtPlayerState* PS = PC->GetPlayerState<ACmtPlayerState>();
+	check(PS);
+	
+	CheatWidgetController = NewObject<UCheatWidgetController>(this, CheatWidgetControllerClass);
+	CheatWidgetController->Setup(PS, PC);
 }

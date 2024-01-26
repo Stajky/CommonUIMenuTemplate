@@ -28,11 +28,17 @@ public:
 	FORCEINLINE void SetLevel(int32 NewLevel);
 
 	UFUNCTION(BlueprintCallable)
+	FORCEINLINE int32 GetPlayerLevel() const;
+	
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetXP(int32 NewXP);
+
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE float GetXP() const;
 	
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetHealth(float NewHealth);
-
+	
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetMaxHealth(float NewMaxHealth);
 
