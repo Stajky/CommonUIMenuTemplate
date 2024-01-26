@@ -8,13 +8,13 @@ UCmtActivatableWidget_WithController::UCmtActivatableWidget_WithController(const
 {
 }
 
-void UCmtActivatableWidget_WithController::SetController(UCmtWidgetController* NewController)
+void UCmtActivatableWidget_WithController::SetWidgetController(UCmtWidgetController* NewController)
 {
 	Controller = NewController;
 	BP_OnSetController();
 }
 
-UCmtWidgetController* UCmtActivatableWidget_WithController::GetController() const
+UCmtWidgetController* UCmtActivatableWidget_WithController::GetWidgetController() const
 {
 	return Controller;
 }

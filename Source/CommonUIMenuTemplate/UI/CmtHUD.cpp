@@ -80,7 +80,7 @@ void ACmtHUD::ShowPlayerOverlay()
 			//Set controller pointer to widget
 			if(PlayerOverlayWidgetController)
 			{
-				PlayerOverlayWidget->SetController(PlayerOverlayWidgetController);
+				PlayerOverlayWidget->SetWidgetController(PlayerOverlayWidgetController);
 			}
 		}
 	}

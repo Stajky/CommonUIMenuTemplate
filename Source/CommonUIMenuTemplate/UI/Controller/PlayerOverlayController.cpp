@@ -23,6 +23,32 @@ void UPlayerOverlayController::BindDataGenerators()
 	// asi by se hodilo mit tady pointery k classe kde jsou tyto informace a pak kde jsou klasicky bindy no
 	
 
+	/* Bind to Player State Data */
+	PlayerState->OnLevelChanged.AddLambda(
+		[this](int32 NewLevel)
+		{
+			SendIntMessage(CmtTag::UI_Message_Level, NewLevel);
+		});
+
+	PlayerState->OnXPChanged.AddLambda(
+		[this](int32 NewXPPercent)
+		{
+			SendFloatMessage(CmtTag::UI_Message_XPPercent, NewXPPercent);
+		});
+
+	PlayerState->OnHealthChanged.AddLambda(
+		[this](float NewHealthPercent)
+		{
+			SendFloatMessage(CmtTag::UI_Message_HealthPercent, NewHealthPercent);
+		});
+
+	PlayerState->OnManaChanged.AddLambda(
+		[this](float NewManaPercent)
+		{
+			SendFloatMessage(CmtTag::UI_Message_ManaPercent, NewManaPercent);
+		});
+	
+	
 }
 
 void UPlayerOverlayController::SetDataGeneratorsPointers(ACmtPlayerState* PS)
@@ -30,50 +56,9 @@ void UPlayerOverlayController::SetDataGeneratorsPointers(ACmtPlayerState* PS)
 	PlayerState = PS;
 }
 
-FCmtPlayerAttributes UPlayerOverlayController::GetPlayerAttributes()
+FPlayerAttributes UPlayerOverlayController::GetPlayerAttributes() const
 {
-	return PlayerState->PlayerAttributes;
-}
-
-
-void UPlayerOverlayController::OnLevelChanged(int32 newLevel)
-{
-	SendIntMessage(CmtTag::UI_Message_Level, newLevel);
-}
-
-void UPlayerOverlayController::OnXPChanged(int32 newXP)
-{
-	SendIntMessage(CmtTag::UI_Message_XP, newXP);
-}
-
-void UPlayerOverlayController::OnHealthChanged(float newHealth)
-{
-	SendFloatMessage(CmtTag::UI_Message_Health, newHealth);
-}
-
-void UPlayerOverlayController::OnManaChanged(float newMana)
-{
-	SendFloatMessage(CmtTag::UI_Message_Mana, newMana);
-}
-
-void UPlayerOverlayController::OnSpell1Cooldown(float newCooldown)
-{
-	SendFloatMessage(CmtTag::UI_Message_Spell1, newCooldown);
-}
-
-void UPlayerOverlayController::OnSpell2Cooldown(float newCooldown)
-{
-	SendFloatMessage(CmtTag::UI_Message_Spell2, newCooldown);
-}
-
-void UPlayerOverlayController::OnSpell3Cooldown(float newCooldown)
-{
-	SendFloatMessage(CmtTag::UI_Message_Spell3, newCooldown);
-}
-
-void UPlayerOverlayController::OnSpell4Cooldown(float newCooldown)
-{
-	SendFloatMessage(CmtTag::UI_Message_Spell4, newCooldown);
+	return PlayerState->GetPlayerAttributes();
 }
 
 void UPlayerOverlayController::SendIntMessage(FGameplayTag Tag, int32 Value) const

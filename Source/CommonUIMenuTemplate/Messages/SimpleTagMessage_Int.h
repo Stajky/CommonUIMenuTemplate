@@ -14,6 +14,6 @@ struct COMMONUIMENUTEMPLATE_API FSimpleTagMessage_Int : public FSimpleTagMessage
 	
 public:
 	UPROPERTY(BlueprintReadWrite)
-	int32 Value;
+	int32 Value = 0;
 
 };

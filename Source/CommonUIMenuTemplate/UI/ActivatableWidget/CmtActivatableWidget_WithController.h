@@ -25,10 +25,10 @@ public:
 	UCmtActivatableWidget_WithController(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
 	UFUNCTION(BlueprintCallable)
-	void SetController(UCmtWidgetController* NewController);
+	void SetWidgetController(UCmtWidgetController* NewController);
 
 	UFUNCTION(BlueprintCallable)
-	UCmtWidgetController* GetController() const;
+	UCmtWidgetController* GetWidgetController() const;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
