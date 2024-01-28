@@ -37,7 +37,7 @@ void UCheatWidgetController::UnBindData()
 void UCheatWidgetController::AddToLevel(const FInputActionValue& InputActionValue)
 {
 	//TODO remove hardcoded value
-	PlayerState->SetLevel(PlayerState->GetPlayerLevel() + 100.0f);
+	PlayerState->SetLevel(PlayerState->GetPlayerLevel() + 1);
 }
 
 void UCheatWidgetController::NativeActivateWidgetController()

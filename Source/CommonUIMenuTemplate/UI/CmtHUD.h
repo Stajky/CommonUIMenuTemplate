@@ -21,7 +21,12 @@ class COMMONUIMENUTEMPLATE_API ACmtHUD : public AHUD
 	GENERATED_BODY()
 public:
 	ACmtHUD(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
-
+	
+	UFUNCTION(BlueprintCallable)
+	UPlayerOverlayController* GetPlayerOverlayWidgetController();
+	UFUNCTION(BlueprintCallable)
+	UCheatWidgetController* GetCheatWidgetController();
+	
 protected:
 	//~UObject interface
 	virtual void PreInitializeComponents() override;
@@ -32,8 +37,7 @@ protected:
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 	//~End of AActor interface
 
-	UPlayerOverlayController* GetPlayerOverlayWidgetController();
-	UCheatWidgetController* GetCheatWidgetController();
+
 
 	UFUNCTION(BlueprintCallable)
 	void ShowPlayerOverlay();

@@ -14,5 +14,7 @@ class COMMONUIMENUTEMPLATE_API UPlayerOverlay : public UCmtActivatableWidget_Wit
 {
 	GENERATED_BODY()
 public:
-	virtual void NativeConstruct() override;
+	/* ~UCmtActivatableWidget_WithController */
+	virtual void SetupWidgetController() override;
+	/* ~End of UCmtActivatableWidget_WithController */
 };

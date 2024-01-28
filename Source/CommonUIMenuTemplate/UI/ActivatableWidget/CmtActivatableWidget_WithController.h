@@ -23,10 +23,7 @@ class COMMONUIMENUTEMPLATE_API UCmtActivatableWidget_WithController : public UCm
 	GENERATED_BODY()
 public:
 	UCmtActivatableWidget_WithController(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
-
-	UFUNCTION(BlueprintCallable)
-	void SetWidgetController(UCmtWidgetController* NewController);
-
+	
 	UFUNCTION(BlueprintCallable)
 	UCmtWidgetController* GetWidgetController() const;
 
@@ -36,10 +33,11 @@ protected:
 	virtual void NativeOnDeactivated() override;
 	/* ~End of UCommonActivatableWidget */
 	
+	virtual void SetupWidgetController();
+	
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	TObjectPtr<UCmtWidgetController> WidgetController;
-
-	UFUNCTION(BlueprintImplementableEvent)
-	void BP_OnSetController();
+	
+	bool bIsWidgetControllerSet = false;
 };

@@ -34,9 +34,15 @@ void ACmtHUD::PreInitializeComponents()
 
 void ACmtHUD::BeginPlay()
 {
+	Super::BeginPlay();
+	
 	UGameFrameworkComponentManager::SendGameFrameworkComponentExtensionEvent(this, UGameFrameworkComponentManager::NAME_GameActorReady);
 
-	Super::BeginPlay();
+	if(APlayerController* PC = UGameplayStatics::GetPlayerController(GetWorld(), 0))
+	{
+		SetupPlayerOverlayController(PC);
+		SetupCheatWidgetController(PC);
+	}
 }
 
 
@@ -86,20 +92,6 @@ void ACmtHUD::ShowPlayerOverlay()
 
 			//Save the new reference to HUD
 			PlayerOverlayWidget = Cast<UPlayerOverlay>(PlayerOverlay);
-
-			//If we successfully created new widget and its controller is not yet initialised init the controller set it up
-			if(PlayerOverlayWidget && !PlayerOverlayWidgetController)
-			{
-				SetupPlayerOverlayController(PC);
-			}
-			
-			//Set controller pointer to widget
-			if(PlayerOverlayWidgetController)
-			{
-				PlayerOverlayWidget->SetWidgetController(PlayerOverlayWidgetController);
-			}
-
-			PlayerOverlay->ActivateWidget();
 		}
 	}
 }
