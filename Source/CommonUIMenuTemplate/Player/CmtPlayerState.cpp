@@ -9,7 +9,7 @@ ACmtPlayerState::ACmtPlayerState(const FObjectInitializer& ObjectInitializer)
 	PrimaryActorTick.bCanEverTick = false;
 }
 
-void ACmtPlayerState::SetLevel(int32 NewLevel)
+void ACmtPlayerState::SetPlayerLevel(int32 NewLevel)
 {
 	PlayerAttributes.Level = NewLevel;
 	OnLevelChanged.Broadcast(NewLevel);
@@ -34,28 +34,55 @@ float ACmtPlayerState::GetXP() const
 
 void ACmtPlayerState::SetHealth(float NewHealth)
 {
-	OnHealthChanged.Broadcast(NewHealth);
+	NewHealth = FMath::Clamp(NewHealth,0.0f,GetMaxHealth());
+	
+	OnHealthChanged.Broadcast(NewHealth / GetMaxHealth());
 	PlayerAttributes.Health = NewHealth;
+}
+
+float ACmtPlayerState::GetHealth() const
+{
+	return PlayerAttributes.Health;
+}
+
+float ACmtPlayerState::GetMaxHealth() const
+{
+	return PlayerAttributes.MaxHealth;
+}
+
+float ACmtPlayerState::GetMana() const
+{
+	return PlayerAttributes.Mana;
+}
+
+float ACmtPlayerState::GetMaxMana() const
+{
+	return PlayerAttributes.MaxMana;
 }
 
 void ACmtPlayerState::SetMaxHealth(float NewMaxHealth)
 {
-	const float NewPercent = CalculateHealthPercentageOnMaxValueChange(PlayerAttributes.Health, PlayerAttributes.MaxHealth, NewMaxHealth);
-	OnHealthChanged.Broadcast(NewPercent);
+	//Get the difference between old and new value
+	const float Difference = NewMaxHealth - PlayerAttributes.MaxHealth;
 	PlayerAttributes.MaxHealth = NewMaxHealth;
+	//Here adding to MAX value will add it to base value as well, It will also broadcast the change
+	SetHealth(GetHealth() + Difference);
 }
 
 void ACmtPlayerState::SetMana(float NewMana)
 {
-	OnHealthChanged.Broadcast(NewMana);
+	NewMana = FMath::Clamp(NewMana,0.0f, GetMaxMana());
+	OnManaChanged.Broadcast(NewMana / GetMaxMana());
 	PlayerAttributes.Mana = NewMana;
 }
 
 void ACmtPlayerState::SetMaxMana(float NewMaxMana)
 {
-	const float NewPercent = CalculateHealthPercentageOnMaxValueChange(PlayerAttributes.Mana, PlayerAttributes.MaxMana, NewMaxMana);
-	OnHealthChanged.Broadcast(NewPercent);
-	PlayerAttributes.MaxHealth = NewMaxMana;
+	//Get the difference between old and new value
+	const float Difference = NewMaxMana - PlayerAttributes.MaxMana;
+	PlayerAttributes.MaxMana = NewMaxMana;
+	//Here adding to MAX value will add it to base value as well, It will also broadcast the change
+	SetMana(GetMana() + Difference);
 }
 
 void ACmtPlayerState::SetSpell1Cooldown(float NewCooldown)
@@ -80,7 +107,7 @@ void ACmtPlayerState::SetSpell3Cooldown(float NewCooldown)
 
 void ACmtPlayerState::SetSpell4Cooldown(float NewCooldown)
 {
-	OnSpell3CooldownChanged.Broadcast(NewCooldown);
+	OnSpell4CooldownChanged.Broadcast(NewCooldown);
 	PlayerSpellData.Spell4Cooldown = NewCooldown;
 }
 
@@ -99,7 +126,7 @@ float ACmtPlayerState::CalculateXPPercent(int32 NewXP) const
 	//These are hardcoded here one would generally create a whole system that handles XP component of some kind
 	//but for our purposes this is fine
 	constexpr int MaxLevel = 40;
-	constexpr float XPForFirstLevel = 100;
+	constexpr float XPForFirstLevel = 1000;
 	constexpr float XPForLastLevel = 10000;
 
 	const float B = log(XPForLastLevel / XPForFirstLevel) / (MaxLevel - 1);
@@ -110,10 +137,4 @@ float ACmtPlayerState::CalculateXPPercent(int32 NewXP) const
 	const float XPNeeded = CurrLevelXP - LastLevelXP;
 
 	return NewXP / XPNeeded;
-}
-
-float ACmtPlayerState::CalculateHealthPercentageOnMaxValueChange(float CurrValue, float OldMaxValue, float NewMaxValue) const
-{
-	const float HealthDifference = NewMaxValue - OldMaxValue;
-	return (CurrValue + HealthDifference) / NewMaxValue;
 }

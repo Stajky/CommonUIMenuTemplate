@@ -30,7 +30,7 @@ void UPlayerOverlayController::BindData()
 		});
 
 	OnXPChangedHandle = PlayerState->OnXPChanged.AddLambda(
-		[this](int32 NewXPPercent)
+		[this](float NewXPPercent)
 		{
 			UCmtLibrary::SendFloatMessage(this,CmtTag::UI_Message_XPPercent, NewXPPercent);
 		});
@@ -47,6 +47,29 @@ void UPlayerOverlayController::BindData()
 			UCmtLibrary::SendFloatMessage(this,CmtTag::UI_Message_ManaPercent, NewManaPercent);
 		});
 
+	OnSpell1CooldownHandle = PlayerState->OnSpell1CooldownChanged.AddLambda(
+		[this](float NewCooldown)
+		{
+			UCmtLibrary::SendFloatMessage(this,CmtTag::UI_Message_Spell1Cooldown, NewCooldown);
+		});
+
+	OnSpell2CooldownHandle = PlayerState->OnSpell2CooldownChanged.AddLambda(
+		[this](float NewCooldown)
+		{
+			UCmtLibrary::SendFloatMessage(this,CmtTag::UI_Message_Spell2Cooldown, NewCooldown);
+		});
+
+	OnSpell3CooldownHandle = PlayerState->OnSpell3CooldownChanged.AddLambda(
+		[this](float NewCooldown)
+		{
+			UCmtLibrary::SendFloatMessage(this,CmtTag::UI_Message_Spell3Cooldown, NewCooldown);
+		});
+
+	OnSpell4CooldownHandle = PlayerState->OnSpell4CooldownChanged.AddLambda(
+		[this](float NewCooldown)
+		{
+			UCmtLibrary::SendFloatMessage(this,CmtTag::UI_Message_Spell4Cooldown, NewCooldown);
+		});
 }
 
 

@@ -25,7 +25,7 @@ public:
 	ACmtPlayerState(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
 	UFUNCTION(BlueprintCallable)
-	FORCEINLINE void SetLevel(int32 NewLevel);
+	FORCEINLINE void SetPlayerLevel(int32 NewLevel);
 
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE int32 GetPlayerLevel() const;
@@ -38,16 +38,30 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetHealth(float NewHealth);
+
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE float GetHealth() const;
 	
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetMaxHealth(float NewMaxHealth);
 
 	UFUNCTION(BlueprintCallable)
+	FORCEINLINE float GetMaxHealth() const;
+	
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetMana(float NewMana);
 
 	UFUNCTION(BlueprintCallable)
+	FORCEINLINE float GetMana() const;
+	
+	
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetMaxMana(float NewMaxMana);
 
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE float GetMaxMana() const;
+	
+	
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetSpell1Cooldown(float NewCooldown);
 
@@ -65,11 +79,10 @@ public:
 private:
 
 	FORCEINLINE float CalculateXPPercent(int32 NewXP) const;
-	FORCEINLINE float CalculateHealthPercentageOnMaxValueChange(float CurrValue, float OldMaxValue, float NewMaxValue) const;
 	
 public:
 	FOnIntegerChangedSignature OnLevelChanged;
-	FOnIntegerChangedSignature OnXPChanged;
+	FOnFloatChangedSignature OnXPChanged;
 	FOnFloatChangedSignature OnHealthChanged;
 	FOnFloatChangedSignature OnMaxHealthChanged;
 	FOnFloatChangedSignature OnManaChanged;

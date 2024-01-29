@@ -12,9 +12,10 @@ namespace CmtTag
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Move,          "InputTag.Move", "Player Move");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Zoom,          "InputTag.Zoom", "Zoom Camera");
 
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Cheat_F1, "InputTag.Cheat.F1", "Cheat Input for F1 key");
-
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GMSChannel_UI, "GMSChannel.UI", "Gameplay Message System UI channel");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Cheat_CallAllSpells, "InputTag.Cheat.CallAllSpells", "Cheat Input for to call all spells for convinience");
+	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GMSChannel_UI_Int,"GMSChannel.UI.Int", "Gameplay Int Message System UI channel");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GMSChannel_UI_Float,"GMSChannel.UI.Float", "Gameplay Float Message System UI channel");
 
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Message_Level, "UI.Message.Level", "GMS Message with level data");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Message_XPPercent, "UI.Message.XPPercent", "GMS Message with XP Percent data");

@@ -44,6 +44,11 @@ private:
 	FDelegateHandle OnXPChangedHandle;
 	FDelegateHandle OnHealthChangedHandle;
 	FDelegateHandle OnManaChangedHandle;
+	FDelegateHandle OnSpell1CooldownHandle;
+	FDelegateHandle OnSpell2CooldownHandle;
+	FDelegateHandle OnSpell3CooldownHandle;
+	FDelegateHandle OnSpell4CooldownHandle;
+	
 };
 
 

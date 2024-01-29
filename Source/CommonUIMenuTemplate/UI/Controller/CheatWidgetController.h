@@ -29,8 +29,39 @@ public:
 	/* ~End of UCmtWidgetController */
 	
 	void Setup(ACmtPlayerState* InPlayerState, APlayerController*  InPlayerController);
+
+	UFUNCTION(BlueprintCallable)
+	void AddToLevel();
 	
-	void AddToLevel(const FInputActionValue& InputActionValue);
+	UFUNCTION(BlueprintCallable)
+	void SubFromLevel();
+	
+	UFUNCTION(BlueprintCallable)
+	void AddToXP();
+	UFUNCTION(BlueprintCallable)
+	void SubFromXP();
+	
+	UFUNCTION(BlueprintCallable)
+	void AddToMana();
+	UFUNCTION(BlueprintCallable)
+	void SubFromMana();
+	
+	UFUNCTION(BlueprintCallable)
+	void AddToHealth();
+	UFUNCTION(BlueprintCallable)
+	void SubFromHealth();
+
+	UFUNCTION(BlueprintCallable)
+	void AddToMaxHealth();
+	UFUNCTION(BlueprintCallable)
+	void SubFromMaxHealth();
+
+	UFUNCTION(BlueprintCallable)
+	void AddToMaxMana();
+	UFUNCTION(BlueprintCallable)
+	void SubFromMaxMana();
+	
+	void CallAllSpells(const FInputActionValue& InputActionValue);
 protected:
 
 	UPROPERTY(EditDefaultsOnly)
@@ -49,7 +80,13 @@ private:
 	void UnbindInputValueActions();
 	
 	void SetupEnhancedInputDataForCpp() const;
-
+public:
+	int32 AddLevelMagnitude = 1;
+	float AddXPMagnitude = 100;
+	float AddHealthMagnitude = 10;
+	float AddManaMagnitude = 10;
+	float AddMaxHealthMagnitude = 10;
+	float AddMaxManaMagnitude = 10;
 private:
 	UPROPERTY(Transient, VisibleInstanceOnly)
 	TSet<int32> InputEventBindingHandles;

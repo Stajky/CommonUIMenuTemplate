@@ -18,7 +18,7 @@ void UCheatWidgetController::BindData()
 	
 	UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerController->InputComponent);
 
-	BindInputValueAction(EnhancedInput, CmtTag::InputTag_Cheat_F1, ETriggerEvent::Completed, this, &ThisClass::AddToLevel);
+	BindInputValueAction(EnhancedInput, CmtTag::InputTag_Cheat_CallAllSpells, ETriggerEvent::Completed, this, &ThisClass::CallAllSpells);
 }
 
 void UCheatWidgetController::UnBindData()
@@ -34,10 +34,12 @@ void UCheatWidgetController::UnBindData()
 	UnbindInputValueActions();
 }
 
-void UCheatWidgetController::AddToLevel(const FInputActionValue& InputActionValue)
+void UCheatWidgetController::CallAllSpells(const FInputActionValue& InputActionValue)
 {
-	//TODO remove hardcoded value
-	PlayerState->SetLevel(PlayerState->GetPlayerLevel() + 1);
+	PlayerState->SetSpell1Cooldown(8.0f);
+	PlayerState->SetSpell2Cooldown(8.0f);
+	PlayerState->SetSpell3Cooldown(8.0f);
+	PlayerState->SetSpell4Cooldown(8.0f);
 }
 
 void UCheatWidgetController::NativeActivateWidgetController()
@@ -132,6 +134,66 @@ void UCheatWidgetController::Setup(ACmtPlayerState* InPlayerState, APlayerContro
 	
 	SetupEnhancedInputDataForCpp();
 	BindData();
+}
+
+void UCheatWidgetController::AddToLevel()
+{
+	PlayerState->SetPlayerLevel(PlayerState->GetPlayerLevel() + AddLevelMagnitude);
+}
+
+void UCheatWidgetController::SubFromLevel()
+{
+	PlayerState->SetPlayerLevel(PlayerState->GetPlayerLevel() - AddLevelMagnitude);
+}
+
+void UCheatWidgetController::AddToXP()
+{
+	PlayerState->SetXP(PlayerState->GetXP() + AddXPMagnitude);
+}
+
+void UCheatWidgetController::SubFromXP()
+{
+	PlayerState->SetXP(PlayerState->GetXP() - AddXPMagnitude);
+}
+
+void UCheatWidgetController::AddToMana()
+{
+	PlayerState->SetMana(PlayerState->GetMana() + AddManaMagnitude);
+}
+
+void UCheatWidgetController::SubFromMana()
+{
+	PlayerState->SetMana(PlayerState->GetMana() - AddManaMagnitude);
+}
+
+void UCheatWidgetController::AddToHealth()
+{
+	PlayerState->SetHealth(PlayerState->GetHealth() + AddHealthMagnitude);
+}
+
+void UCheatWidgetController::SubFromHealth()
+{
+	PlayerState->SetHealth(PlayerState->GetHealth() - AddHealthMagnitude);
+}
+
+void UCheatWidgetController::AddToMaxHealth()
+{
+	PlayerState->SetMaxHealth(PlayerState->GetMaxHealth() + AddMaxHealthMagnitude);
+}
+
+void UCheatWidgetController::SubFromMaxHealth()
+{
+	PlayerState->SetMaxHealth(PlayerState->GetMaxHealth() - AddMaxHealthMagnitude);
+}
+
+void UCheatWidgetController::AddToMaxMana()
+{
+	PlayerState->SetMaxMana(PlayerState->GetMaxMana() + AddMaxManaMagnitude);
+}
+
+void UCheatWidgetController::SubFromMaxMana()
+{
+	PlayerState->SetMaxMana(PlayerState->GetMaxMana() - AddMaxManaMagnitude);
 }
 
 

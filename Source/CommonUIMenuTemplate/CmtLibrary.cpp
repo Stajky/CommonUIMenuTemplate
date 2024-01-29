@@ -86,7 +86,7 @@ void UCmtLibrary::SendIntMessage(const UObject* WorldContextObject, FGameplayTag
 	FSimpleTagMessage_Int OutgoingMessage;
 	OutgoingMessage.Tag = Tag;
 	OutgoingMessage.Value = Value;
-	MessageSubsystem.BroadcastMessage(CmtTag::GMSChannel_UI, OutgoingMessage);
+	MessageSubsystem.BroadcastMessage(CmtTag::GMSChannel_UI_Int, OutgoingMessage);
 }
 
 void UCmtLibrary::SendFloatMessage(const UObject* WorldContextObject, FGameplayTag Tag, float Value)
@@ -95,7 +95,7 @@ void UCmtLibrary::SendFloatMessage(const UObject* WorldContextObject, FGameplayT
 	FSimpleTagMessage_Float OutgoingMessage;
 	OutgoingMessage.Tag = Tag;
 	OutgoingMessage.Value = Value;
-	MessageSubsystem.BroadcastMessage(CmtTag::GMSChannel_UI, OutgoingMessage);
+	MessageSubsystem.BroadcastMessage(CmtTag::GMSChannel_UI_Float, OutgoingMessage);
 }
 
 
