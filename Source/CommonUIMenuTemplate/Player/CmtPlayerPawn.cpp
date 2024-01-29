@@ -2,7 +2,6 @@
 
 
 #include "CmtPlayerPawn.h"
-
 #include "EnhancedInputSubsystems.h"
 #include "GameplayTagContainer.h"
 #include "CommonUIMenuTemplate/CmtGameplayTags.h"
@@ -10,6 +9,7 @@
 #include "PlayerMappableInputConfig.h"
 #include "CommonUIMenuTemplate/CmtLibrary.h"
 #include "GameFramework/FloatingPawnMovement.h"
+
 
 
 // Sets default values
@@ -129,7 +129,6 @@ void ACmtPlayerPawn::PossessedBy(AController* NewController)
 					Subsystem->AddMappingContext(Imc, Priority, Options);
 				}
 			}
-			
 		}
 	}
 }
@@ -169,8 +168,9 @@ void ACmtPlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	}
 	
 	// Look and Zoom should update every tick while Triggered
-	BindInputValueAction(EnhancedInput, CmtTag::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
-	BindInputValueAction(EnhancedInput, CmtTag::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
+	BindInputValueAction(EnhancedInput, CmtTag::InputTag_Look, ETriggerEvent::Triggered, this, &ACmtPlayerPawn::Input_Look);
+	BindInputValueAction(EnhancedInput, CmtTag::InputTag_Move, ETriggerEvent::Triggered, this, &ACmtPlayerPawn::Input_Move);
 	
 }
+
 

@@ -17,17 +17,32 @@ class COMMONUIMENUTEMPLATE_API UCmtWidgetController : public UObject
 public:
 
 	//Function for binding/listening for data generators 
-	UFUNCTION()
-	virtual void BindDataGenerators();
+	UFUNCTION(BlueprintCallable)
+	virtual void BindData();
+	
+	UFUNCTION(BlueprintCallable)
+	virtual void UnBindData();
 
 	//Function to refresh, to get all the data from the data generators
 	//It should be used when the Activatable widget is activated to ensure that we have up to data data
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	virtual void RefreshWidgetData();
+	
+	virtual void NativeActivateWidgetController();
+	virtual void NativeDeactivateWidgetController();
 
+	/* ~UObject */	
+	virtual void BeginDestroy() override;
+	/* ~End of UObject */
+	
 protected:
-
 	//Function to broadcast data from generators
 	UFUNCTION()
-	virtual void Broadcast(); 
+	virtual void Broadcast();
+	
+	bool LockGuard();
+	bool UnlockGuard();
+	
+protected:
+	bool bGuard = false;
 };

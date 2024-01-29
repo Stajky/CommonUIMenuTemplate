@@ -31,7 +31,8 @@ public class CommonUIMenuTemplate : ModuleRules
 			"UMG",
 			"EnhancedInput",
 			"Slate",
-			"SlateCore"
+			"SlateCore", 
+			"GameplayMessageRuntime"
 		});
 		
 		// Uncomment if you are using Slate UI

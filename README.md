@@ -7,8 +7,8 @@ Road map:
 - [x] Loading screen
 - [x] Save and load system
 - [x] Load and save UI
-- [ ] Player HUD
-- [ ] Mock GAS-like communication for player HUD
+- [x] Player HUD
+- [x] Mock/Cheat GAS-like communication for Widget Controllers
 - [ ] Pause menu
 - [ ] Settings
 - [ ] Write summary about CommonUI

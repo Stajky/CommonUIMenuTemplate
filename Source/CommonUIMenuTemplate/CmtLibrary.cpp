@@ -2,8 +2,14 @@
 
 
 #include "CmtLibrary.h"
+
+#include "CmtGameplayTags.h"
 #include "EnhancedInputSubsystems.h"
+#include "GameFramework/GameplayMessageSubsystem.h"
 #include "Input/CommonUIActionRouterBase.h"
+#include "Messages/SimpleTagMessage_Float.h"
+#include "Messages/SimpleTagMessage_Int.h"
+#include "Player/CmtPlayerPawn.h"
 
 UEnhancedInputLocalPlayerSubsystem* UCmtLibrary::GetEnhancedInputLocalPlayerSubsystem(
 	const APlayerController* PlayerController)
@@ -73,3 +79,23 @@ void UCmtLibrary::CmtSetMouseInputMode(APlayerController* PlayerController, bool
 	// Tell the Action Router to use this new input config
 	ActionRouter->SetActiveUIInputConfig(NewInputConfig);
 }
+
+void UCmtLibrary::SendIntMessage(const UObject* WorldContextObject, FGameplayTag Tag, int32 Value)
+{
+	UGameplayMessageSubsystem& MessageSubsystem = UGameplayMessageSubsystem::Get(WorldContextObject);
+	FSimpleTagMessage_Int OutgoingMessage;
+	OutgoingMessage.Tag = Tag;
+	OutgoingMessage.Value = Value;
+	MessageSubsystem.BroadcastMessage(CmtTag::GMSChannel_UI_Int, OutgoingMessage);
+}
+
+void UCmtLibrary::SendFloatMessage(const UObject* WorldContextObject, FGameplayTag Tag, float Value)
+{
+	UGameplayMessageSubsystem& MessageSubsystem = UGameplayMessageSubsystem::Get(WorldContextObject);
+	FSimpleTagMessage_Float OutgoingMessage;
+	OutgoingMessage.Tag = Tag;
+	OutgoingMessage.Value = Value;
+	MessageSubsystem.BroadcastMessage(CmtTag::GMSChannel_UI_Float, OutgoingMessage);
+}
+
+

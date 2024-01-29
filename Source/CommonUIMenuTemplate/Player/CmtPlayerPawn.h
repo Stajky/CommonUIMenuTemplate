@@ -42,6 +42,8 @@ public:
 	virtual void UnPossessed() override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	//~End of APawn Interface
+
+	
 	
 protected:
 
@@ -52,8 +54,7 @@ protected:
 	/** Map of InputActions to C++ GameplayTags */
 	UPROPERTY(EditDefaultsOnly)
 	TObjectPtr<const UInputActionToTagMap> InputActionMap;
-
-
+	
 private:
 	UPROPERTY(Transient, VisibleInstanceOnly)
 	TSet<int32> InputEventBindingHandles;
