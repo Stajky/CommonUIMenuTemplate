@@ -78,8 +78,6 @@ private:
 	template<class UserClass, typename... VarTypes>
 	void BindInputValueAction(UEnhancedInputComponent* EnhancedInputComponent, FGameplayTag InputTag, ETriggerEvent TriggerEvent, UserClass* Object, typename FEnhancedInputActionHandlerValueSignature::template TMethodPtr< UserClass, VarTypes... > Func, VarTypes... Vars);
 	void UnbindInputValueActions();
-	
-	void SetupEnhancedInputDataForCpp() const;
 public:
 	UPROPERTY(EditAnywhere, Category="Magnitudes")
 	int32 AddLevelMagnitude = 1;
