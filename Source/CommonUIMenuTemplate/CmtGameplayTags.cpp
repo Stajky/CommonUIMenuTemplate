@@ -26,6 +26,7 @@ namespace CmtTag
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Message_Spell3Cooldown, "UI.Message.Spell3Cooldown", "GMS Message with Spell3 Cooldown data");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Message_Spell4Cooldown, "UI.Message.Spell4Cooldown", "GMS Message with Spell4 Cooldowndata");
 	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Modal_Confirm, "UI.Modal.Confirm", "UI Modal Confirm Message");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Modal_ConfirmLoad, "UI.Modal.ConfirmLoad", "UI Modal Confirm Load Message");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Modal_ConfirmSave, "UI.Modal.ConfirmSave", "UI Modal Confirm Save Message");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Modal_ConfirmDelete, "UI.Modal.ConfirmDelete", "UI Modal Confirm Delete Message");

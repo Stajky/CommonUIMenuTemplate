@@ -102,37 +102,11 @@ void UCheatWidgetController::UnbindInputValueActions()
 	InputEventBindingHandles.Reset();
 }
 
-
-void UCheatWidgetController::SetupEnhancedInputDataForCpp() const
-{
-	//setup our C++ links to BP definitions, YOU NEED TO SET THE MAPPINGS IN BLUEPRINT VERSION OF THIS Controller
-	if(PlayerController)
-	{
-		if (UEnhancedInputLocalPlayerSubsystem* Subsystem  = UCmtLibrary::GetEnhancedInputLocalPlayerSubsystem(PlayerController))
-		{
-			UE_LOG(LogTemp, Display, TEXT("Remove previous Mapping context if any"));
-			Subsystem->RemoveMappingContext(CheatInputMappingContext);
-			
-			if(CheatInputMappingContext)
-			{
-				UE_LOG(LogTemp, Display, TEXT("Adding IMC [%s] with priority %i"), *GetNameSafe(CheatInputMappingContext), IMCPriority);
-
-				FModifyContextOptions Options = {};
-				Options.bIgnoreAllPressedKeysUntilRelease = false;
-
-				Subsystem->AddMappingContext(CheatInputMappingContext, IMCPriority, Options);
-			}
-		}
-	}
-}
-
-
 void UCheatWidgetController::Setup(ACmtPlayerState* InPlayerState, APlayerController* InPlayerController)
 {
 	PlayerState = InPlayerState;
 	PlayerController = InPlayerController;
 	
-	SetupEnhancedInputDataForCpp();
 	BindData();
 }
 
