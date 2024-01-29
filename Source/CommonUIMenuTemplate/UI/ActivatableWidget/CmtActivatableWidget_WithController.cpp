@@ -16,13 +16,9 @@ UCmtWidgetController* UCmtActivatableWidget_WithController::GetWidgetController(
 
 void UCmtActivatableWidget_WithController::NativeOnActivated()
 {
-	Super::NativeOnActivated();
-
 	SetupWidgetController();
 	
 	//linkup the WidgetControllerActivate with WidgetActivate
-	//This will fail be null the first time its called since activate happens automatically when we push to stack,
-	//This means that we need to handle this case with OnControllerSet logic
 	if(WidgetController)
 	{
 		WidgetController->NativeActivateWidgetController();
@@ -31,6 +27,8 @@ void UCmtActivatableWidget_WithController::NativeOnActivated()
 	{
 		UE_LOG(LogTemp, Error, TEXT("In %s widget controller is not set!. Did You forget to implement SetupWidgetController"), *GetName())
 	}
+
+	Super::NativeOnActivated();
 }
 
 void UCmtActivatableWidget_WithController::NativeOnDeactivated()

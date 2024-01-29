@@ -81,11 +81,17 @@ private:
 	
 	void SetupEnhancedInputDataForCpp() const;
 public:
+	UPROPERTY(EditAnywhere, Category="Magnitudes")
 	int32 AddLevelMagnitude = 1;
+	UPROPERTY(EditAnywhere, Category="Magnitudes")
 	float AddXPMagnitude = 100;
+	UPROPERTY(EditAnywhere, Category="Magnitudes")
 	float AddHealthMagnitude = 10;
+	UPROPERTY(EditAnywhere, Category="Magnitudes")
 	float AddManaMagnitude = 10;
+	UPROPERTY(EditAnywhere, Category="Magnitudes")
 	float AddMaxHealthMagnitude = 10;
+	UPROPERTY(EditAnywhere, Category="Magnitudes")
 	float AddMaxManaMagnitude = 10;
 private:
 	UPROPERTY(Transient, VisibleInstanceOnly)

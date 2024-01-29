@@ -35,6 +35,14 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE float GetXP() const;
+
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE float GetXPPercent() const;
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE float GetHealthPercent() const;
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE float GetManaPercent() const;
+
 	
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetHealth(float NewHealth);

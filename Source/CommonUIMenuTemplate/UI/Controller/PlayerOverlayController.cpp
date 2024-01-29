@@ -97,6 +97,14 @@ void UPlayerOverlayController::UnBindData()
 	}
 }
 
+void UPlayerOverlayController::RefreshWidgetData()
+{
+	UCmtLibrary::SendIntMessage(this, CmtTag::UI_Message_Level, PlayerState->GetPlayerLevel());
+	UCmtLibrary::SendFloatMessage(this,CmtTag::UI_Message_XPPercent, PlayerState->GetXPPercent());
+	UCmtLibrary::SendFloatMessage(this,CmtTag::UI_Message_HealthPercent, PlayerState->GetHealthPercent());
+	UCmtLibrary::SendFloatMessage(this,CmtTag::UI_Message_ManaPercent, PlayerState->GetManaPercent());
+}
+
 
 void UPlayerOverlayController::NativeActivateWidgetController()
 {

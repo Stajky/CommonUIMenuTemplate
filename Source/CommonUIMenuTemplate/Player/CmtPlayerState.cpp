@@ -32,6 +32,21 @@ float ACmtPlayerState::GetXP() const
 	return PlayerAttributes.XP;
 }
 
+float ACmtPlayerState::GetXPPercent() const
+{
+	return CalculateXPPercent(GetXP());
+}
+
+float ACmtPlayerState::GetHealthPercent() const
+{
+	return GetHealth()/GetMaxHealth();
+}
+
+float ACmtPlayerState::GetManaPercent() const
+{
+	return GetMana()/GetMaxMana();
+}
+
 void ACmtPlayerState::SetHealth(float NewHealth)
 {
 	NewHealth = FMath::Clamp(NewHealth,0.0f,GetMaxHealth());

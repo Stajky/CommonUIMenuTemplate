@@ -28,6 +28,7 @@ public:
 	/** ~UCmtWidgetController functions */
 	virtual void BindData() override;
 	virtual void UnBindData() override;
+	virtual void RefreshWidgetData() override;
 	virtual void NativeActivateWidgetController() override;
 	virtual void NativeDeactivateWidgetController() override;
 	/** ~End of UCmtWidgetController functions */
