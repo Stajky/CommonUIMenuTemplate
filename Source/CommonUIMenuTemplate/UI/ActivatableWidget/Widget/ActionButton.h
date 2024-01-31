@@ -54,7 +54,7 @@ protected:
 	UPROPERTY(BlueprintAssignable, Category = "Events")
 	FActionButtonPressed OnActionPressed;
 	
-	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
+	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, OptionalWidget = true))
 	UCommonActionWidget* InputActionIcon;
 
 private:
