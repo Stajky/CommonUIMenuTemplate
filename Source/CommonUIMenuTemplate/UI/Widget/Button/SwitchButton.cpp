@@ -36,11 +36,11 @@ TSharedPtr<SWidget> USwitchButton::HandleNavigation(EUINavigation UINavigation)
 {
 	if (UINavigation == EUINavigation::Left)
 	{
-		ShiftTextLeftInternal(true);
+		ShiftTextLeftInternal();
 	}
 	else if (UINavigation == EUINavigation::Right)
 	{
-		ShiftTextRightInternal(true);
+		ShiftTextRightInternal();
 	}
 
 	return nullptr;
@@ -76,10 +76,10 @@ void USwitchButton::SetSelectedItem(int32 InIndex)
 
 void USwitchButton::ShiftTextLeft()
 {
-	ShiftTextLeftInternal(false);
+	ShiftTextLeftInternal();
 }
 
-void USwitchButton::ShiftTextLeftInternal(bool bFromNavigation)
+void USwitchButton::ShiftTextLeftInternal()
 {
 	if (IsInteractionEnabled())
 	{
@@ -95,23 +95,22 @@ void USwitchButton::ShiftTextLeftInternal(bool bFromNavigation)
 		if (TextLabels.IsValidIndex(SelectedIndex))
 		{
 			SetSelectedItem(SelectedIndex);
-
-			if (OnSwitched.IsBound())
-			{
-				OnSwitched.Broadcast(SelectedIndex);
-			}
-
-			OnSwitchedEvent.Broadcast(SelectedIndex, bFromNavigation);
 		}
 	}
 }
 
 void USwitchButton::ShiftTextRight()
 {
-	ShiftTextRightInternal(false);
+	ShiftTextRightInternal();
 }
 
-void USwitchButton::ShiftTextRightInternal(bool bFromNavigation)
+void USwitchButton::SetDefaultOption(int32 DefaultOptionIndex)
+{
+	SetSelectedItem(DefaultOptionIndex);
+	BP_OnDefaultOptionSpecified(DefaultOptionIndex);
+}
+
+void USwitchButton::ShiftTextRightInternal()
 {
 	if (IsInteractionEnabled())
 	{
@@ -127,15 +126,9 @@ void USwitchButton::ShiftTextRightInternal(bool bFromNavigation)
 		if (TextLabels.IsValidIndex(SelectedIndex))
 		{
 			SetSelectedItem(SelectedIndex);
-
-			if (OnSwitched.IsBound())
-			{
-				OnSwitched.Broadcast(SelectedIndex);
-			}
-
-			OnSwitchedEvent.Broadcast(SelectedIndex, bFromNavigation);
 		}
 	}
 }
+
 
 

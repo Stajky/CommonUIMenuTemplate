@@ -30,28 +30,32 @@ public:
 	TSharedPtr<SWidget> HandleNavigation(EUINavigation UINavigation);
 
 	/** Set the array of texts available */
-	UFUNCTION(BlueprintCallable, Category = "Behavior")
+	UFUNCTION(BlueprintCallable, Category = "Switch Button")
 	void PopulateTextLabels(TArray<FText> Labels);
 
 	/** Gets the current text value of the slider. */
-	UFUNCTION(BlueprintCallable, Category = "Behavior")
+	UFUNCTION(BlueprintCallable, Category = "Switch Button")
 	FText GetSelectedText() const;
 
 	/** Sets the current value of the slider. */
-	UFUNCTION(BlueprintCallable, Category = "Behavior")
+	UFUNCTION(BlueprintCallable, Category = "Switch Button")
 	virtual void SetSelectedItem(int32 InValue);
 
 	/** Gets the current selected index */
-	UFUNCTION(BlueprintCallable, Category = "Behavior")
+	UFUNCTION(BlueprintCallable, Category = "Switch Button")
 	int32 GetSelectedIndex() const { return SelectedIndex; }
 
 	/** Shift the current text left. */
-	UFUNCTION(BlueprintCallable, Category = "Behavior")
+	UFUNCTION(BlueprintCallable, Category = "Switch Button")
 	void ShiftTextLeft();
 
 	/** Shift the current text right. */
-	UFUNCTION(BlueprintCallable, Category = "Behavior")
+	UFUNCTION(BlueprintCallable, Category = "Switch Button")
 	void ShiftTextRight();
+
+	/**  Sets the default value of the slider. */
+	UFUNCTION(BlueprintCallable, Category = "Switch Button")
+	void SetDefaultOption(int32 DefaultOptionIndex);
 
 public:
 
@@ -63,16 +67,17 @@ public:
 	FSwitchedEvent OnSwitchedEvent;
 
 protected:
-	void ShiftTextLeftInternal(bool bFromNavigation);
-	void ShiftTextRightInternal(bool bFromNavigation);
-
-protected:
+	void ShiftTextLeftInternal();
+	void ShiftTextRightInternal();
+	
 	UFUNCTION(BlueprintImplementableEvent, Category = Events, meta = (DisplayName = "On Options Populated"))
 	void BP_OnOptionsPopulated(int32 Count);
 
 	UFUNCTION(BlueprintImplementableEvent, Category = Events, meta = (DisplayName = "On Options Selected"))
 	void BP_OnOptionSelected(int32 Index);
 
+	UFUNCTION(BlueprintImplementableEvent, Category = Events, meta = (DisplayName = "On Default Option Specified"))
+	void BP_OnDefaultOptionSpecified(int32 DefaultOptionIndex);
 protected:
 
 	/** The displayed text */
