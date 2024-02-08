@@ -7,6 +7,21 @@
 #include "CommonInputTypeEnum.h"
 
 
+USettingsEditor::USettingsEditor()
+{
+	SetIsFocusable(true);
+}
+
+void USettingsEditor::NativeOnInitialized()
+{
+	Super::NativeOnInitialized();
+
+	if (UCommonInputSubsystem* CommonInputSubsystem = UCommonInputSubsystem::Get(GetOwningLocalPlayer()))
+	{
+		CommonInputSubsystem->OnInputMethodChangedNative.AddUObject(this, &ThisClass::HandleInputMethodChanged);
+	}	
+}
+
 FReply USettingsEditor::NativeOnFocusReceived(const FGeometry& InGeometry, const FFocusEvent& InFocusEvent)
 {
 	const UCommonInputSubsystem* InputSubsystem = GetInputSubsystem();
@@ -21,11 +36,21 @@ FReply USettingsEditor::NativeOnFocusReceived(const FGeometry& InGeometry, const
 			}
 		}
 	}
-
+	
 	return FReply::Unhandled();
+}
+
+void USettingsEditor::NativeOnFocusLost(const FFocusEvent& InFocusEvent)
+{
+	
 }
 
 UWidget* USettingsEditor::NativeGetPrimaryGamepadFocusWidget()
 {
 	return nullptr;
+}
+
+void USettingsEditor::HandleInputMethodChanged(ECommonInputType CurrentInputType)
+{
+	InputType = CurrentInputType;
 }

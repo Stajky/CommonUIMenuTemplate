@@ -28,10 +28,10 @@ protected:
 	// ~Start of USettingsEditor
 	virtual UWidget* NativeGetPrimaryGamepadFocusWidget() override;
 	// ~End of USettingsEditor
-
+	
 	void HandleOptionDecrease();
 	void HandleOptionIncrease();
-	
+
 private:	// Bound Widgets
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget, BlueprintProtected = true, AllowPrivateAccess = true))
 	TObjectPtr<USwitchButton> SwitchButton;

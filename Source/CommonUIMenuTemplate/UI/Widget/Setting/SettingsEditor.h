@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CommonPlayerInputKey.h"
 #include "CommonUserWidget.h"
 #include "SettingsEditor.generated.h"
 
@@ -20,14 +21,40 @@ UCLASS()
 class COMMONUIMENUTEMPLATE_API USettingsEditor : public UCommonUserWidget
 {
 	GENERATED_BODY()
+public:
 
+	USettingsEditor();
+	
 protected:
-	/*~ Start of UUserwidget */ 
+	/*~ Start of UUserwidget */
+	virtual void NativeOnInitialized() override;
 	// Focus transitioning to subwidgets for the gamepad
 	virtual FReply NativeOnFocusReceived(const FGeometry& InGeometry, const FFocusEvent& InFocusEvent) override;
+	virtual void NativeOnFocusLost(const FFocusEvent& InFocusEvent) override;
 	/*~ End of UUserwidget */
 	
 	virtual UWidget* NativeGetPrimaryGamepadFocusWidget();
+
+	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
+	// UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Focused"))
+	// void BP_OnFocused();
+
+	
+	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Focused"))
+	void BP_OnFocused();
+
+	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Unfocused"))
+	void BP_OnUnfocused();
+
+private:
+	void HandleInputMethodChanged(ECommonInputType CurrentInputType);
+	
+public:
+
+	UPROPERTY(BlueprintReadWrite)
+	ECommonInputType InputType;
 	
 private:	// Bound Widgets
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget, BlueprintProtected = true, AllowPrivateAccess = true))
