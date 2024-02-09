@@ -2,14 +2,14 @@
 
 
 #include "CmtLibrary.h"
-
 #include "CmtGameplayTags.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/GameplayMessageSubsystem.h"
 #include "Input/CommonUIActionRouterBase.h"
+#include "Messages/Message_Text.h"
 #include "Messages/SimpleTagMessage_Float.h"
 #include "Messages/SimpleTagMessage_Int.h"
-#include "Player/CmtPlayerPawn.h"
+
 
 UEnhancedInputLocalPlayerSubsystem* UCmtLibrary::GetEnhancedInputLocalPlayerSubsystem(
 	const APlayerController* PlayerController)
@@ -96,6 +96,14 @@ void UCmtLibrary::SendFloatMessage(const UObject* WorldContextObject, FGameplayT
 	OutgoingMessage.Tag = Tag;
 	OutgoingMessage.Value = Value;
 	MessageSubsystem.BroadcastMessage(CmtTag::GMSChannel_UI_Float, OutgoingMessage);
+}
+
+void UCmtLibrary::SendChangeSettingDescriptionMessage(const UObject* WorldContextObject, FText Value)
+{
+	UGameplayMessageSubsystem& MessageSubsystem = UGameplayMessageSubsystem::Get(WorldContextObject);
+	FMessage_Text OutgoingMessage;
+	OutgoingMessage.Value = Value;
+	MessageSubsystem.BroadcastMessage(CmtTag::GMSChannel_UI_SettingDescribtion, OutgoingMessage);
 }
 
 

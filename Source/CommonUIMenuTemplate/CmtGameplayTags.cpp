@@ -16,6 +16,7 @@ namespace CmtTag
 	
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GMSChannel_UI_Int,"GMSChannel.UI.Int", "Gameplay Int Message System UI channel");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GMSChannel_UI_Float,"GMSChannel.UI.Float", "Gameplay Float Message System UI channel");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GMSChannel_UI_SettingDescribtion,"GMSChannel.UI.SettingDescribtion", "Gameplay Float Message System UI channel");
 
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Message_Level, "UI.Message.Level", "GMS Message with level data");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(UI_Message_XPPercent, "UI.Message.XPPercent", "GMS Message with XP Percent data");

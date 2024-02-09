@@ -25,6 +25,18 @@ public:
 
 	USettingsEditor();
 	
+	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Focused"))
+	void BP_OnFocused();
+
+	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Unfocused"))
+	void BP_OnUnfocused();
+	
+	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Focused Event"))
+	void BP_OnFocusedEvent(const FString& RichText);
+	
 protected:
 	/*~ Start of UUserwidget */
 	virtual void NativeOnInitialized() override;
@@ -34,19 +46,6 @@ protected:
 	/*~ End of UUserwidget */
 	
 	virtual UWidget* NativeGetPrimaryGamepadFocusWidget();
-
-	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
-	// UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Focused"))
-	// void BP_OnFocused();
-
-	
-	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Focused"))
-	void BP_OnFocused();
-
-	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
-	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Unfocused"))
-	void BP_OnUnfocused();
 
 private:
 	void HandleInputMethodChanged(ECommonInputType CurrentInputType);

@@ -28,7 +28,8 @@ protected:
 	// ~Start of USettingsEditor
 	virtual UWidget* NativeGetPrimaryGamepadFocusWidget() override;
 	// ~End of USettingsEditor
-	
+
+private:
 	void HandleOptionDecrease();
 	void HandleOptionIncrease();
 
