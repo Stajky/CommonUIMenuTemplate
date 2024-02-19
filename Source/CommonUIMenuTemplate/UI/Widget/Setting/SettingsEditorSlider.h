@@ -7,6 +7,7 @@
 #include "SettingsEditorSlider.generated.h"
 
 class UCmtSlider;
+class UImage;
 /**
  * 
  */
