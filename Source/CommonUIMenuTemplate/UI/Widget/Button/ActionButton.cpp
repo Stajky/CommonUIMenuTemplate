@@ -18,6 +18,8 @@ void UActionButton::SetListeningForInput(bool bShouldListen)
 		bIsListeningForInput = bShouldListen;
 		UpdateBindings();
 	}
+
+	RefreshInputActionIconValue();
 }
 
 void UActionButton::NativeConstruct()
@@ -28,8 +30,6 @@ void UActionButton::NativeConstruct()
 	{
 		SetListeningForInput(true);
 	}
-
-	RefreshInputActionIconValue();
 }
 
 void UActionButton::NativeDestruct()

@@ -37,7 +37,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Meta=(DefaultToSelf="WidgetContextObject"))
 	static void SendFloatMessage(const UObject* WorldContextObject, FGameplayTag Tag, float Value);
-		
+	
+	UFUNCTION(BlueprintCallable, Meta=(DefaultToSelf="WidgetContextObject"))
+	static void SendChangeSettingDescriptionMessage(const UObject* WorldContextObject, FText Value);
 };
 
 
