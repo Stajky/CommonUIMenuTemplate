@@ -10,8 +10,6 @@ class UWidget;
 class USwitchButton;
 class UCommonButtonBase;
 
-
-
 /**
  * 
  */
@@ -19,7 +17,13 @@ UCLASS()
 class COMMONUIMENUTEMPLATE_API USettingsEditorDiscrete : public USettingsEditor
 {
 	GENERATED_BODY()
+public:
 
+	/**  Sets the default value of the slider. */
+	// ~Start of USettingsEditor
+	virtual void SetCurrentAsDefaultOption() override;
+	// ~End of USettingsEditor
+	
 protected:
 	// ~Start of UUserWidget
 	virtual void NativeOnInitialized() override;

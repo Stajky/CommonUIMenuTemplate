@@ -24,6 +24,12 @@ class COMMONUIMENUTEMPLATE_API USettingsEditor : public UCommonUserWidget
 public:
 
 	USettingsEditor();
+
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, meta = (DisplayName = "Commit Value"))
+	void BP_CommitValue();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void SetCurrentAsDefaultOption();
 	
 	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Focused"))
@@ -32,6 +38,14 @@ public:
 	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Unfocused"))
 	void BP_OnUnfocused();
+
+	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Hovered"))
+	void BP_OnHovered();
+
+	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Unhovered"))
+	void BP_OnUnhovered();
 	
 	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Focused Event"))
@@ -40,6 +54,8 @@ public:
 protected:
 	/*~ Start of UUserwidget */
 	virtual void NativeOnInitialized() override;
+	virtual void NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+	virtual void NativeOnMouseLeave(const FPointerEvent& InMouseEvent) override;
 	// Focus transitioning to subwidgets for the gamepad
 	virtual FReply NativeOnFocusReceived(const FGeometry& InGeometry, const FFocusEvent& InFocusEvent) override;
 	virtual void NativeOnFocusLost(const FFocusEvent& InFocusEvent) override;

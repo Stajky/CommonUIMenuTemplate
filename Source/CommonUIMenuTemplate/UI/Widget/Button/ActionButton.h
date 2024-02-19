@@ -44,11 +44,11 @@ protected:
 	bool bAutoListenForInput;
 
 	/** The input action to listen for causing the skip */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = ActionButton, meta = (RowType = "/Script/CommonUI.CommonInputActionDataBase"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ActionButton, meta = (RowType = "/Script/CommonUI.CommonInputActionDataBase"))
 	FDataTableRowHandle InputAction;
 
 	/** The input action to listen for causing the skip */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = ActionButton, meta = (EditCondition = "CommonInput.CommonInputSettings.IsEnhancedInputSupportEnabled", EditConditionHides))
+	UPROPERTY(EditAnywhere,  BlueprintReadWrite, Category = ActionButton, meta = (EditCondition = "CommonInput.CommonInputSettings.IsEnhancedInputSupportEnabled", EditConditionHides))
 	TObjectPtr<UInputAction> EnhancedInputAction;
 
 	UPROPERTY(BlueprintAssignable, Category = "Events")

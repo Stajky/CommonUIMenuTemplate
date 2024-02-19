@@ -3,6 +3,15 @@
 
 #include "SettingsEditorSlider.h"
 #include "../../Slate/Widget/CmtSlider.h"
+#include "Components/Image.h"
+
+void USettingsEditorSlider::SetCurrentAsDefaultOption()
+{
+	DefaultValue = Slider->GetValue();
+	UMaterialInstanceDynamic* DynamicMaterial = ProgressImage->GetDynamicMaterial();
+	DynamicMaterial->SetScalarParameterValue("DefaultValue",DefaultValue);
+	//Normally here we would save to our SettingsSystem, but we use mock data se we just set the visuals  
+}
 
 void USettingsEditorSlider::NativeOnInitialized()
 {

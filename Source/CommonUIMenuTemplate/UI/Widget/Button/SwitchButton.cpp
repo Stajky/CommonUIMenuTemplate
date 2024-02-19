@@ -104,6 +104,11 @@ void USwitchButton::ShiftTextRight()
 	ShiftTextRightInternal();
 }
 
+int32 USwitchButton::GetCurrentOptionIndex()
+{
+	return SelectedIndex;
+}
+
 void USwitchButton::SetDefaultOption(int32 DefaultOptionIndex)
 {
 	SetSelectedItem(DefaultOptionIndex);

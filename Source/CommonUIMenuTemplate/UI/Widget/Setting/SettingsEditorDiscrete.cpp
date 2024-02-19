@@ -7,6 +7,14 @@
 #include "Components/Widget.h"
 
 
+
+void USettingsEditorDiscrete::SetCurrentAsDefaultOption()
+{
+	const int32 CurrOptionIndex = SwitchButton->GetCurrentOptionIndex();
+	SwitchButton->SetDefaultOption(CurrOptionIndex);
+	//Normally here we would save to our SettingsSystem, but we use mock data se we just set the visuals  
+}
+
 void USettingsEditorDiscrete::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();

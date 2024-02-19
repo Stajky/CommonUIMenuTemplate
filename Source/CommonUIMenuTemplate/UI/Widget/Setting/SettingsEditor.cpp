@@ -12,6 +12,10 @@ USettingsEditor::USettingsEditor()
 	SetIsFocusable(true);
 }
 
+void USettingsEditor::SetCurrentAsDefaultOption()
+{
+}
+
 void USettingsEditor::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
@@ -20,6 +24,18 @@ void USettingsEditor::NativeOnInitialized()
 	{
 		CommonInputSubsystem->OnInputMethodChangedNative.AddUObject(this, &ThisClass::HandleInputMethodChanged);
 	}	
+}
+
+void USettingsEditor::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+{
+	BP_OnHovered();
+	Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
+}
+
+void USettingsEditor::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
+{
+	BP_OnUnhovered();
+	Super::NativeOnMouseLeave(InMouseEvent);
 }
 
 FReply USettingsEditor::NativeOnFocusReceived(const FGeometry& InGeometry, const FFocusEvent& InFocusEvent)

@@ -55,6 +55,10 @@ public:
 
 	/**  Sets the default value of the slider. */
 	UFUNCTION(BlueprintCallable, Category = "Switch Button")
+	int32 GetCurrentOptionIndex();
+	
+	/**  Sets the default value of the slider. */
+	UFUNCTION(BlueprintCallable, Category = "Switch Button")
 	void SetDefaultOption(int32 DefaultOptionIndex);
 
 public:
