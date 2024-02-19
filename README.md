@@ -10,7 +10,8 @@ Road map:
 - [x] Player HUD
 - [x] Mock/Cheat GAS-like communication for Widget Controllers
 - [x] Pause menu
-- [ ] Settings
+- [x] Settings
+- [ ] Beautifly (well at least make passable :D)
 - [ ] Write summary about CommonUI
 
 
