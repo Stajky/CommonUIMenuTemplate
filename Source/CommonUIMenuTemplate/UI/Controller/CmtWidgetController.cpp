@@ -29,9 +29,6 @@ void UCmtWidgetController::BeginDestroy()
 	UObject::BeginDestroy();
 }
 
-void UCmtWidgetController::Broadcast()
-{
-}
 
 bool UCmtWidgetController::LockGuard()
 {

@@ -10,7 +10,7 @@
 class UInputAction;
 class UCommonActionWidget;
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FActionButtonPressed);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FSimpleDynamicDelegate);
 
 /**
  * 
@@ -25,6 +25,17 @@ public:
 	UFUNCTION(BlueprintCallable, Category = ActionButton)
 	virtual void SetListeningForInput(bool bShouldListen);
 
+	/* ~Start of UUserWidget */
+	virtual void NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+	virtual void NativeOnMouseLeave(const FPointerEvent& InMouseEvent) override;
+	/* ~End of UUserWidget */
+
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Hovered"))
+	void BP_OnHovered();
+
+	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Unhovered"))
+	void BP_OnUnhovered();
+	
 protected:
 	// UUserWidget interface
 	virtual void NativeConstruct() override;
@@ -52,7 +63,7 @@ protected:
 	TObjectPtr<UInputAction> EnhancedInputAction;
 
 	UPROPERTY(BlueprintAssignable, Category = "Events")
-	FActionButtonPressed OnActionPressed;
+	FSimpleDynamicDelegate OnActionPressed;
 	
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget, OptionalWidget = true))
 	UCommonActionWidget* InputActionIcon;

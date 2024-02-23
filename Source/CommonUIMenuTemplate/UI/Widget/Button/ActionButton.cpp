@@ -22,6 +22,18 @@ void UActionButton::SetListeningForInput(bool bShouldListen)
 	RefreshInputActionIconValue();
 }
 
+void UActionButton::NativeOnMouseEnter(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+{
+	BP_OnHovered();
+	Super::NativeOnMouseEnter(InGeometry, InMouseEvent);
+}
+
+void UActionButton::NativeOnMouseLeave(const FPointerEvent& InMouseEvent)
+{
+	BP_OnUnhovered();
+	Super::NativeOnMouseLeave(InMouseEvent);
+}
+
 void UActionButton::NativeConstruct()
 {
 	Super::NativeConstruct();
