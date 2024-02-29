@@ -11,7 +11,7 @@ Road map:
 - [x] Mock/Cheat GAS-like communication for Widget Controllers
 - [x] Pause menu
 - [x] Settings
-- [ ] Beautifly (well at least make passable :D)
+- [x] Beautifly (well at least make passable :D)
 - [ ] Write summary about CommonUI
 
 
