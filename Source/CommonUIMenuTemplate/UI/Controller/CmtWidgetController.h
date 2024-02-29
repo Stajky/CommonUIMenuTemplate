@@ -36,9 +36,6 @@ public:
 	/* ~End of UObject */
 	
 protected:
-	//Function to broadcast data from generators
-	UFUNCTION()
-	virtual void Broadcast();
 	
 	bool LockGuard();
 	bool UnlockGuard();

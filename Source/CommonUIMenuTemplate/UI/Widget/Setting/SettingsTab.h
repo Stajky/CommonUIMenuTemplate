@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "CommonUserWidget.h"
+#include "CommonUIMenuTemplate/UI/ActivatableWidget/CmtActivatableWidget.h"
 #include "SettingsTab.generated.h"
 
 class UScrollBox;
@@ -11,7 +11,7 @@ class UScrollBox;
  * 
  */
 UCLASS()
-class COMMONUIMENUTEMPLATE_API USettingsTab : public UCommonUserWidget
+class COMMONUIMENUTEMPLATE_API USettingsTab : public UCmtActivatableWidget
 {
 	GENERATED_BODY()
 public:
