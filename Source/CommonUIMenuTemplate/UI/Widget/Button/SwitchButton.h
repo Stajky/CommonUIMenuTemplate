@@ -56,6 +56,10 @@ public:
 	/**  Sets the default value of the slider. */
 	UFUNCTION(BlueprintCallable, Category = "Switch Button")
 	int32 GetCurrentOptionIndex();
+
+	/**  Sets the default value of the slider. */
+	UFUNCTION(BlueprintCallable, Category = "Switch Button")
+	int32 GetDefaultOptionIndex();
 	
 	/**  Sets the default value of the slider. */
 	UFUNCTION(BlueprintCallable, Category = "Switch Button")
@@ -93,4 +97,5 @@ protected:
 
 	/** The index of the current text item */
 	int32 SelectedIndex;
+	int32 DefaultIndex;
 };

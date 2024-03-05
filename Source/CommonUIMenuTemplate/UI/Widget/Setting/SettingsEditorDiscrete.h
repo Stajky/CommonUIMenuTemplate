@@ -22,6 +22,7 @@ public:
 	/**  Sets the default value of the slider. */
 	// ~Start of USettingsEditor
 	virtual void SetCurrentAsDefaultOption() override;
+	virtual void ResetToDefaultOption() override;
 	// ~End of USettingsEditor
 	
 protected:

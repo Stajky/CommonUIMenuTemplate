@@ -19,6 +19,7 @@ class COMMONUIMENUTEMPLATE_API USettingsEditorSlider : public USettingsEditor
 public:
 	// ~Start of USettingsEditor
 	virtual void SetCurrentAsDefaultOption() override;
+	virtual void ResetToDefaultOption() override;
 	// ~End of USettingsEditor
 	
 protected:

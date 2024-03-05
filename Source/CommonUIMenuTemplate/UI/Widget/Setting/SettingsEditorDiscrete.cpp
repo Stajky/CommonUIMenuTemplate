@@ -15,6 +15,12 @@ void USettingsEditorDiscrete::SetCurrentAsDefaultOption()
 	//Normally here we would save to our SettingsSystem, but we use mock data se we just set the visuals  
 }
 
+void USettingsEditorDiscrete::ResetToDefaultOption()
+{
+	const int32 DefaultOptionIndex = SwitchButton->GetDefaultOptionIndex();
+	SwitchButton->SetDefaultOption(DefaultOptionIndex);
+}
+
 void USettingsEditorDiscrete::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();

@@ -71,3 +71,6 @@ DerivedDataCache/*
 
 # Ignore files added by Finder on Mac
 .DS_Store
+
+# Ignore Builds
+Builds/*

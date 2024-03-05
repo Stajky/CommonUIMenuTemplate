@@ -16,6 +16,10 @@ void USettingsEditor::SetCurrentAsDefaultOption()
 {
 }
 
+void USettingsEditor::ResetToDefaultOption()
+{
+}
+
 void USettingsEditor::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();

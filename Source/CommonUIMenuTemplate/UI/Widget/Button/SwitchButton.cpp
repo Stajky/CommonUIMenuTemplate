@@ -50,6 +50,7 @@ void USwitchButton::PopulateTextLabels(TArray<FText> Labels)
 {
 	TextLabels = Labels;
 	SelectedIndex = 0;
+	DefaultIndex = SelectedIndex;
 
 	BP_OnOptionsPopulated(TextLabels.Num());
 }
@@ -109,8 +110,14 @@ int32 USwitchButton::GetCurrentOptionIndex()
 	return SelectedIndex;
 }
 
+int32 USwitchButton::GetDefaultOptionIndex()
+{
+	return  DefaultIndex;
+}
+
 void USwitchButton::SetDefaultOption(int32 DefaultOptionIndex)
 {
+	DefaultIndex = DefaultOptionIndex;
 	SetSelectedItem(DefaultOptionIndex);
 	BP_OnDefaultOptionSpecified(DefaultOptionIndex);
 }

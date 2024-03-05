@@ -13,6 +13,12 @@ void USettingsEditorSlider::SetCurrentAsDefaultOption()
 	//Normally here we would save to our SettingsSystem, but we use mock data se we just set the visuals  
 }
 
+void USettingsEditorSlider::ResetToDefaultOption()
+{
+	UMaterialInstanceDynamic* DynamicMaterial = ProgressImage->GetDynamicMaterial();
+	DynamicMaterial->SetScalarParameterValue("Progress",DefaultValue);
+}
+
 void USettingsEditorSlider::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();

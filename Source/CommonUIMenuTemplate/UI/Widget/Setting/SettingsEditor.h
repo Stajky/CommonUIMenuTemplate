@@ -30,6 +30,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	virtual void SetCurrentAsDefaultOption();
+
+	UFUNCTION(BlueprintCallable)
+	virtual void ResetToDefaultOption();
 	
 	/** Beware this needs to be setup in the child class where the input receiver is or it won't be called at all*/
 	UFUNCTION(BlueprintImplementableEvent, meta = (DisplayName = "On Focused"))
