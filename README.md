@@ -123,5 +123,14 @@ For the setting editors themselves there are two main ones SettingsEditorDiscret
 The setting description window works as a simple panel with a rich block. And on hover each setting will send a rich text string to the description where you display the desired data.
 PS: The setting themself have no backend just UI and hence will not be save and will not change any settings
 
+## Quick tips:
+1. Adding the widget to same layer will automatically replace the previous one (Push Onto the previous one)
+2. If you want to show only one widget AKA hide all widgets, just push empty widget to other layers
+3. To control visibility you can use widget activation/deactivation its already implemented
+4. When you activate widget CommonUI will automatically recompute focus
+5. I would recommend creating a BPLibrary function to reset focus, so that you can control focus that way
+6. For scroll box if widgets need to have some space before or after add spacer to the scroll box
+7. I dont recommend using the style option from CommonUI use modular components and materials
+8. When setting material parameters use widget animation
 
 
